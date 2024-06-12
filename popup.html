@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Grade Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="libs/chart.min.js"></script>
+</head>
+<body>
+    <h1>Grade Calculator</h1>
+    <button id="calculateGrades">Calculate Grades</button>
+    <div class="controls-container">
+        <select id="options">
+            <option id="showAverageGrade" value="averageGrade">Average Grade pr. semester</option>
+            <option id="showTotalCredits" value="totalCredits">Credits pr. Semester</option>
+            <option id="cumulativeCredits" value="cumulativeCredits">Cumulative Credits</option>
+            <option id="cumulativeAverageGrade" value="cumulativeAverageGrade">Average Grade Over Time</option>
+        </select>
+        <div class="result-item">
+            Average Grade: <span id="averageGrade"></span>
+        </div>
+        <div class="result-item">
+            Total Credits: <span id="totalCredits"></span>
+        </div>
+        <!-- Sorting buttons -->
+        <div class="sorting-buttons">
+            <button id="sortAsc">Sort by Date Ascending</button>
+            <button id="sortDesc">Sort by Date Descending</button>
+        </div>
+    </div>
+    <canvas id="gradesChart" width="250" height="100"></canvas>
+    <ul id="courseList"></ul>
+    <script src="popup.js"></script>
+    <h3>Version: Beta 1.0</h3>
+</body>
+</html>
