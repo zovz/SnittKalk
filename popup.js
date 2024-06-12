@@ -13,8 +13,13 @@ document.getElementById('calculateGrades').addEventListener('click', () => {
     });
 });
 
-document.getElementById('sortAsc').addEventListener('click', () => sortCourses('asc'));
-document.getElementById('sortDesc').addEventListener('click', () => sortCourses('desc'));
+// document.getElementById('sortAsc').addEventListener('click', () => sortCourses('asc'));
+// document.getElementById('sortDesc').addEventListener('click', () => sortCourses('desc'));
+document.getElementById('sortToggle').addEventListener('change', () => {
+    document.getElementById('options').selectedIndex = 0;
+    currentSortOrder = document.getElementById('sortToggle').checked ? 'asc' : 'desc';
+    displayGrades(gradesData);
+});
 
 let gradesData = [];
 let currentSortOrder = 'desc'; // Default sort order
@@ -26,6 +31,7 @@ document.getElementById('options').addEventListener('change', (event) => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
+
     const toggle = document.getElementById('darkModeToggle');
     const matchDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
@@ -109,6 +115,7 @@ function displayGrades(grades) {
             const removeCourseButton = document.createElement('button');
             removeCourseButton.textContent = 'Remove';
             removeCourseButton.addEventListener('click', () => {
+                document.getElementById('options').selectedIndex = 0;
                 grades.splice(grade.index, 1);
                 displayGrades(grades);
                 calculateAndDisplayResults(grades);
@@ -124,6 +131,7 @@ function displayGrades(grades) {
         removeSemesterButton.innerHTML = 'Remove<br/>Semester';
         removeSemesterButton.classList.add('removeSemesterButton');
         removeSemesterButton.addEventListener('click', () => {
+            document.getElementById('options').selectedIndex = 0;
             grades = grades.filter(grade => grade.date !== semester);
             displayGrades(grades);
             calculateAndDisplayResults(grades);
