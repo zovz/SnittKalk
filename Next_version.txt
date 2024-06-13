@@ -1,0 +1,5 @@
+* Add image of dark mode to extension page
+* Add Grade distribution barchart (weighted and not weigted)
+* Make the sort switch darker for dark mode
+* Fix extra "*" in extension page description
+* The Average Grade Over time chart shows the y-axis as "Total Credits". This is wrong, and should be fixed
