@@ -30,24 +30,6 @@ document.getElementById('options').addEventListener('change', (event) => {
     renderChart(selectedOption);
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-
-    const toggle = document.getElementById('darkModeToggle');
-    const matchDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-    toggle.checked = matchDarkMode;
-    document.body.classList.toggle('dark-mode', matchDarkMode);
-
-    toggle.addEventListener('change', function() {
-        document.body.classList.toggle('dark-mode', this.checked);
-    });
-
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-        const isDarkMode = e.matches; // true if dark mode
-        toggle.checked = isDarkMode;
-        document.body.classList.toggle('dark-mode', isDarkMode);
-    });
-});
 
 
 function extractGrades() {
@@ -55,7 +37,7 @@ function extractGrades() {
     const grades = [];
     rows.forEach(row => {
         if (!row.querySelector('.col2Emne .infoLinje') || !row.querySelector('.col6Resultat .infoLinje span') || !row.querySelector('.col7Studiepoeng span') || !row.querySelector('.col1Semester div[class="uuHidden"]')) {
-            return;
+            return 0;
         }
         const semesterElement = row.querySelector('.col2Emne .column-info');
         const course = semesterElement.getElementsByTagName('div')[1].innerText + " - " + semesterElement.getElementsByTagName('div')[2].innerText;
