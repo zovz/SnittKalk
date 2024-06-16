@@ -3,9 +3,12 @@ document.getElementById('calculateGrades').addEventListener('click', () => {
     document.getElementById('options').selectedIndex = 0;
 
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        const activeTab = tabs[0];
+        const url = new URL(activeTab.url);
         chrome.scripting.executeScript({
-            target: { tabId: tabs[0].id },
-            function: extractGrades
+            target: { tabId: activeTab.id },
+            function: extractDataBasedOnWebsite,
+            args: [url.hostname]
         }, (results) => {
             const grades = results[0].result;
             displayGrades(grades);
@@ -13,8 +16,6 @@ document.getElementById('calculateGrades').addEventListener('click', () => {
     });
 });
 
-// document.getElementById('sortAsc').addEventListener('click', () => sortCourses('asc'));
-// document.getElementById('sortDesc').addEventListener('click', () => sortCourses('desc'));
 document.getElementById('sortToggle').addEventListener('change', () => {
     document.getElementById('options').selectedIndex = 0;
     currentSortOrder = document.getElementById('sortToggle').checked ? 'asc' : 'desc';
@@ -30,31 +31,75 @@ document.getElementById('options').addEventListener('change', (event) => {
     renderChart(selectedOption);
 });
 
+function extractDataBasedOnWebsite(hostname) {
+    if (hostname === 'fsweb.no') {
+        console.log('Extracting grades from Studentweb');
+        const rows = document.querySelectorAll('#resultatlisteForm tbody tr');
+        const grades = [];
+        rows.forEach(row => {
+            if (!row.querySelector('.col2Emne .infoLinje') || !row.querySelector('.col6Resultat .infoLinje span') || !row.querySelector('.col7Studiepoeng span') || !row.querySelector('.col1Semester div[class="uuHidden"]')) {
+                return 0;
+            }
+            const semesterElement = row.querySelector('.col2Emne .column-info');
+            const course = semesterElement.getElementsByTagName('div')[1].innerText + " - " + semesterElement.getElementsByTagName('div')[2].innerText;
+            const grade = row.querySelector('.col6Resultat .infoLinje span').innerText;
+            const credits = parseFloat(row.querySelector('.col7Studiepoeng span').innerText.replace(',', '.'));
+            const date = row.querySelector('.col1Semester div[class="uuHidden"]').innerText;
+            grades.push({ course, grade, credits, date });  
+        });
+        return grades;
+    } else if (hostname === 'app.vitnemalsportalen.no') {
+        console.log('Extracting grades from Vitnemålsportalen');
+        const degrees = document.querySelectorAll('#results222');
+        const grades = [];
 
+        degrees.forEach(degree => {
+            const degreeNameElement = degree.querySelector('.degree-name');
+            degreeName = '';
+            if (degreeNameElement) {
+                const degreeName = degreeNameElement.innerText.trim();
+            }
+            const courses = degree.querySelectorAll('tbody tr');
 
-function extractGrades() {
-    const rows = document.querySelectorAll('#resultatlisteForm tbody tr');
-    const grades = [];
-    rows.forEach(row => {
-        if (!row.querySelector('.col2Emne .infoLinje') || !row.querySelector('.col6Resultat .infoLinje span') || !row.querySelector('.col7Studiepoeng span') || !row.querySelector('.col1Semester div[class="uuHidden"]')) {
-            return 0;
-        }
-        const semesterElement = row.querySelector('.col2Emne .column-info');
-        const course = semesterElement.getElementsByTagName('div')[1].innerText + " - " + semesterElement.getElementsByTagName('div')[2].innerText;
-        const grade = row.querySelector('.col6Resultat .infoLinje span').innerText;
-        const credits = parseFloat(row.querySelector('.col7Studiepoeng span').innerText.replace(',', '.'));
-        const date = row.querySelector('.col1Semester div[class="uuHidden"]').innerText;
-        grades.push({ course, grade, credits, date });  
-    });
-    return grades;
+            courses.forEach(course => {
+                const courseCodeElement = course.querySelector('.coursecode span');
+                const courseNameElement = course.querySelector('.coursename');
+                const termElement = course.querySelector('.term');
+                const creditsElement = course.querySelector('.creds');
+                const gradeElement = course.querySelector('.result');
+
+                if (courseCodeElement && courseNameElement && termElement && creditsElement && gradeElement) {
+                    const courseCode = courseCodeElement.innerText.trim();
+                    const courseName = courseNameElement.innerText.trim();
+                    const term = termElement.innerText.trim();
+                    // Parsing credits
+                    let credits = 0;
+                    if (creditsElement.innerText.includes('ECTS') || creditsElement.innerText.includes('stp')) {
+                        const creditsIntegerElement = creditsElement.querySelector('.integerCreds');
+                        const creditsDecimalElement = creditsElement.querySelector('.decimalCreds');
+                        credits = parseFloat(creditsIntegerElement.innerText.replace(',', '.'));
+                    }
+                    const grade = gradeElement.innerText.trim();
+
+                    grades.push({
+                        course: `${courseCode} - ${courseName}`,
+                        grade,
+                        credits,
+                        date: term
+                    });
+                }
+            });
+        });
+        return grades;
+    } else {
+        console.error('Website Not Supported');
+        return [];
+    }
 }
 
-
-
-// Function to sort courses
-function sortCourses(order) {
-    currentSortOrder = order;
-    displayGrades(gradesData);
+// Ensure all functions are defined within the context of the content script
+function extractGrades() {
+    return extractDataBasedOnWebsite(window.location.hostname);
 }
 
 // Update displayGrades to handle sorting
@@ -132,7 +177,7 @@ function calculateAndDisplayResults(grades) {
         return;
     }
     const totalCredits = grades.reduce((sum, grade) => sum + grade.credits, 0);
-    const filteredGrades = grades.filter(grade => grade.grade !== 'Bestått' && grade.grade !== 'Passed');
+    const filteredGrades = grades.filter(grade => grade.grade !== 'Bestått' && grade.grade !== 'Passed' && grade.grade !== 'Pass');
     const totalCreditsWithoutPassGrade = filteredGrades.reduce((sum, grade) => sum + grade.credits, 0);
     const gradeToPoint = {
         'A': 5,
@@ -142,16 +187,16 @@ function calculateAndDisplayResults(grades) {
         'E': 1,
         'F': 0,
     };
-
     const weightedSum = filteredGrades.reduce((sum, grade) => sum + gradeToPoint[grade.grade] * grade.credits, 0);
     const averageGrade = weightedSum / totalCreditsWithoutPassGrade;
+
     document.getElementById('averageGrade').textContent = averageGrade.toFixed(2);
     document.getElementById('totalCredits').textContent = totalCredits;
 }
 
 function formatSortableDate(date) {
     const [year, semester] = date.split(' ');
-    if (semester === 'VÅR' || semester === 'SPRING') {
+    if (semester === 'VÅR' || semester === 'SPRING' || semester === 'Vår' || semester === 'Spring') {
         return `${year}-1`;
     } else {
         return `${year}-2`;
@@ -172,6 +217,9 @@ function renderChart(view) {
     let lastDateWithoutPass = '';
     gradesDataCopy = gradesData.slice();
     gradesDataCopy = gradesDataCopy.reverse();
+    // shape of gradesData = [{course: 'FM1015 - Modelling of Dynamic Systems', credits: 5, date: '2022 Autumn', grade: 'B'},...]
+    // Sorting the array in ascending order of date
+    gradesDataCopy.sort((a, b) => formatSortableDate(a.date).localeCompare(formatSortableDate(b.date)));
     gradesDataCopy.forEach(({ date, grade, credits }) => {
         if (!semesterMap[date]) {
             semesterMap[date] = { totalGradePoints: 0, cumulativeGradePoints: 0, cumulativeTotalCreditsWithoutPass: 0, totalCredits: 0, totalCreditsWithoutPass: 0, cumulativeCredits: 0, count: 0};

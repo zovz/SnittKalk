@@ -1,8 +1,13 @@
+For 1.3:
+* Use the extra information of which grade/course belongs to which degree for some extra plotting and maybe change the grouping (swithc to group between semester and degree?)
+
+For 1.2:
+DONE === * Add support for Vitnemålsportalen
+
+For 1.1:
 DONE === * Add image of dark mode to extension page
 DONE === * Add Grade distribution barchart (weighted and not weigted)
-DONE ===* Make the sort switch darker for dark mode
-* Fix extra "*" in extension page description
+DONE === * Make the sort switch darker for dark mode
+DONE === * Fix extra "*" in extension page description
 DONE === * The Average Grade Over time chart shows the y-axis as "Total Credits". This is wrong, and should be fixed
-* Investigate dark mode issues
-DONE === * The graph in dark mode does not have a grid like the light mode version
-DONE === * Add icons
+DONE === * Investigate dark mode issues
