@@ -1,5 +1,8 @@
-* Add image of dark mode to extension page
-* Add Grade distribution barchart (weighted and not weigted)
-* Make the sort switch darker for dark mode
+DONE === * Add image of dark mode to extension page
+DONE === * Add Grade distribution barchart (weighted and not weigted)
+DONE ===* Make the sort switch darker for dark mode
 * Fix extra "*" in extension page description
-* The Average Grade Over time chart shows the y-axis as "Total Credits". This is wrong, and should be fixed
+DONE === * The Average Grade Over time chart shows the y-axis as "Total Credits". This is wrong, and should be fixed
+* Investigate dark mode issues
+DONE === * The graph in dark mode does not have a grid like the light mode version
+DONE === * Add icons

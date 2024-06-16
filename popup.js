@@ -170,13 +170,9 @@ function renderChart(view) {
 
     let lastDate = '';
     let lastDateWithoutPass = '';
-    // Revserse the gradesData array to get the latest grades first
-    //gradesData = gradesData.reverse();
     gradesDataCopy = gradesData.slice();
     gradesDataCopy = gradesDataCopy.reverse();
     gradesDataCopy.forEach(({ date, grade, credits }) => {
-
-
         if (!semesterMap[date]) {
             semesterMap[date] = { totalGradePoints: 0, cumulativeGradePoints: 0, cumulativeTotalCreditsWithoutPass: 0, totalCredits: 0, totalCreditsWithoutPass: 0, cumulativeCredits: 0, count: 0};
         }
@@ -204,7 +200,6 @@ function renderChart(view) {
         semesterMap[date].totalCredits += credits;
         semesterMap[date].count += 1;
 
-
         if (lastDate) {
             semesterMap[date].cumulativeCredits = semesterMap[lastDate].cumulativeCredits + credits;
         }
@@ -212,16 +207,35 @@ function renderChart(view) {
             semesterMap[date].cumulativeCredits = credits;
         }
         lastDate = date;
-
-        
     });
 
-    
     const labels = Object.keys(semesterMap)
         .sort((a, b) => formatSortableDate(a).localeCompare(formatSortableDate(b)));
     const averageGrades = labels.map(label => semesterMap[label].totalGradePoints / semesterMap[label].totalCreditsWithoutPass);
     const totalCredits = labels.map(label => semesterMap[label].totalCredits);
     const cumulativeAverageGrades = labels.map(label => semesterMap[label].cumulativeGradePoints / semesterMap[label].cumulativeTotalCreditsWithoutPass);
+
+    const gradeCounts = {};
+    const weightedGrades = {};
+
+    gradesData.forEach(({ grade, credits }) => {
+        if (!gradeCounts[grade]) {
+            gradeCounts[grade] = 0;
+        }
+        gradeCounts[grade] += 1;
+
+        if (!weightedGrades[grade]) {
+            weightedGrades[grade] = 0;
+        }
+        weightedGrades[grade] += credits;
+    });
+
+    const defaultGrades = ['A', 'B', 'C', 'D', 'E', 'F'];
+    const foundGrades = Object.keys(gradeCounts).filter(grade => !defaultGrades.includes(grade));
+    const allGrades = defaultGrades.concat(foundGrades);
+
+    const gradeData = allGrades.map(grade => gradeCounts[grade] || 0);
+    const weightedGradeData = allGrades.map(grade => ((weightedGrades[grade] || 0) / gradesData.reduce((sum, { credits }) => sum + credits, 0)) * 100);
 
     const data = {
         labels,
@@ -254,16 +268,37 @@ function renderChart(view) {
         });
     } else if (view === 'cumulativeAverageGrade') {
         data.datasets.push({
-            label: 'Cumulative Average Grade',
+            label: 'Average Grade Over Time',
             data: cumulativeAverageGrades,
             borderColor: 'rgba(255, 99, 132, 1)',
             borderWidth: 1,
             yAxisID: 'y',
         });
+    } else if (view === 'gradeCount') {
+        data.labels = allGrades;
+        data.datasets.push({
+            label: 'Grade Count',
+            data: gradeData,
+            backgroundColor: 'rgba(75, 192, 192, 0.6)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1,
+        });
+    } else if (view === 'weightedGrade') {
+        data.labels = allGrades;
+        data.datasets.push({
+            label: 'Weighted Grade (%)',
+            data: weightedGradeData,
+            backgroundColor: 'rgba(153, 102, 255, 0.6)',
+            borderColor: 'rgba(153, 102, 255, 1)',
+            borderWidth: 1,
+        });
     }
 
+    // Detect if dark mode is enabled
+    const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
     chart = new Chart(ctx, {
-        type: 'line',
+        type: view === 'gradeCount' || view === 'weightedGrade' ? 'bar' : 'line',
         data: data,
         options: {
             scales: {
@@ -272,10 +307,23 @@ function renderChart(view) {
                     position: 'left',
                     title: {
                         display: true,
-                        text: view === 'averageGrade' ? 'Average Grade' : 'Total Credits',
+                        text: view === 'averageGrade' ? 'Grade' : view === 'totalCredits' ? 'Credits' : view === 'cumulativeCredits' ? 'Credits' : view === 'cumulativeAverageGrade' ? 'Grade' : view === 'gradeCount' ? 'Count' : 'Percentage',
                     },
+                    grid: {
+                        color: isDarkMode ? '#444' : '#ccc'
+                    }
                 },
-            },
-        },
+                x: {
+                    grid: {
+                        color: isDarkMode ? '#444' : '#ccc'
+                    }
+                }
+            }
+        }
     });
 }
+
+// Listen for changes in color scheme and re-render the chart if it changes
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+    renderChart(document.getElementById('options').value);
+});
