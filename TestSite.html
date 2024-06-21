@@ -1,0 +1,2383 @@
+<html lang="nb" xmlns="http://www.w3.org/1999/xhtml"><head id="j_idt2">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8"><link type="text/css" rel="stylesheet" href="/studentweb/javax.faces.resource/theme.css.jsf?ln=primefaces-suaf&amp;v=10.0.0&amp;e=10.0.0"><link type="text/css" rel="stylesheet" href="/studentweb/javax.faces.resource/primeicons/primeicons.css.jsf?ln=primefaces&amp;v=10.0.0&amp;e=10.0.0"><link type="text/css" rel="stylesheet" href="/studentweb/javax.faces.resource/components.css.jsf?ln=primefaces&amp;v=10.0.0&amp;e=10.0.0"><script type="text/javascript" async="" src="https://matomo.unit.no/matomo.js"></script><script type="text/javascript" src="/studentweb/javax.faces.resource/jquery/jquery.js.jsf?ln=primefaces&amp;v=10.0.0&amp;e=10.0.0"></script><script type="text/javascript" src="/studentweb/javax.faces.resource/jquery/jquery-plugins.js.jsf?ln=primefaces&amp;v=10.0.0&amp;e=10.0.0"></script><script type="text/javascript" src="/studentweb/javax.faces.resource/core.js.jsf?ln=primefaces&amp;v=10.0.0&amp;e=10.0.0"></script><script type="text/javascript" src="/studentweb/javax.faces.resource/components.js.jsf?ln=primefaces&amp;v=10.0.0&amp;e=10.0.0"></script><script type="text/javascript">if(window.PrimeFaces){PrimeFaces.settings.locale='nb_NO_uio';PrimeFaces.settings.viewId='/resultater.xhtml';PrimeFaces.settings.contextPath='/studentweb';PrimeFaces.settings.cookiesSecure=false;}</script>
+ 
+<title>Resultater -  Studentweb
+</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><!--[if lte IE 8]>
+<link href="resources/css/html5reset.css" media="screen" rel="stylesheet" type="text/css" />
+<script>
+    document.createElement('header');
+    document.createElement('nav');
+    document.createElement('section');
+    document.createElement('article');
+    document.createElement('aside');
+    document.createElement('footer');
+</script><![endif]-->
+
+<script>
+    window.funSetup = {};
+    window.funSetup.contextPath = "/studentweb";
+    window.funSetup.language = "nb";
+    if (["no", "nn", "en"].indexOf(window.funSetup.language) == -1) {
+        window.funSetup.language = "no";
+    }
+</script><script type="text/javascript" src="/studentweb/javax.faces.resource/js/fun.js.jsf"></script>
+<script type="text/javascript" src="resources/js/select2_3.4.1_sun.js"></script>
+
+<script>
+    jQuery(document).ready(function () {
+        replacePfSpansWithDivs();
+    });
+    (function() {
+        const originalOpen = XMLHttpRequest.prototype.open;
+
+        XMLHttpRequest.prototype.open = function() {
+            this.addEventListener('loadend', callBack);
+
+            originalOpen.apply(this, arguments);
+        };
+
+        const callBack = function () {
+            replacePfSpansWithDivs();
+            this.removeEventListener('loadend', callBack);
+        }
+    }());
+</script>
+
+<link href="resources/css/fun.css?rev=3.3.47-30.04.2024-06:22" media="screen" rel="stylesheet" type="text/css">
+<link href="resources/css/select2_3.4.1_sun.css?rev=3.3.47-30.04.2024-06:22" media="screen" rel="stylesheet" type="text/css">
+
+
+
+<link href="resources/css/studweb.css?rev=3.3.47-30.04.2024-06:22" rel="stylesheet" type="text/css"><script type="text/javascript" src="/studentweb/javax.faces.resource/js/diverse.js.jsf?rev=3.3.47-30.04.2024-06%3A22"></script><script type="text/javascript" src="/studentweb/javax.faces.resource/js/check_browser_close.js.jsf?rev=3.3.47-30.04.2024-06%3A22"></script><script type="text/javascript" src="/studentweb/javax.faces.resource/js/appConfig.js.jsf?rev=3.3.47-30.04.2024-06%3A22"></script><script type="text/javascript" src="/studentweb/javax.faces.resource/js/studentwebMatomo.js.jsf?rev=3.3.47-30.04.2024-06%3A22"></script>
+<style>
+    #resultatlisteForm td {
+        vertical-align: top;
+    }
+</style><script type="text/javascript" src="/studentweb/javax.faces.resource/js/barchart.js.jsf?rev=3.3.47-30.04.2024-06%3A22"></script><script type="text/javascript" src="/studentweb/javax.faces.resource/js/meldinger.js.jsf?rev=3.3.47-30.04.2024-06%3A22"></script>
+
+<script>
+    jQuery(document).ready(function() {
+        fixWidths();
+    });
+</script>
+
+<script>
+jQuery(function() {
+    clearSessionStorage();
+    storeCookieInfo();
+    initCheckBrowserClose();
+    setPageCancelMessage('Du har gjort endringer på denne siden og de vil ikke bli lagret. Vil du likevel forlate siden?');
+    fixAll();
+    fixExternalLinks();
+    fixPersonvernlink();
+    fixTilgjengelighetserklaeringlink();
+    addRolePresentationOnSelectOneRadio();
+    preventEventEnterclickCheckboxAndRadio();
+
+    (function() {
+        const originalOpen = XMLHttpRequest.prototype.open;
+
+        XMLHttpRequest.prototype.open = function() {
+            this.addEventListener('loadend', callBack);
+            originalOpen.apply(this, arguments);
+        };
+
+        const callBack = function () {
+            preventEventEnterclickCheckboxAndRadio();
+            fixPfTreeTabindex();
+            this.removeEventListener('loadend', callBack);
+        }
+    }());
+});
+</script>
+
+<link rel="icon" type="image/png" href="/studentweb/javax.faces.resource/img/logo-fs-color-60px.png.jsf"><style type="text/css"></style></head><body>
+<a id="uuShortcut" href="#content" class="uuHidden uuShortcut" tabindex="1" accesskey="s">Gå til innhold</a><div id="infoPanel:popup" class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-shadow ui-hidden-container  lightbox" style="max-width: 800px; height: auto;" role="dialog" aria-describedby="infoPanel:popup_content" aria-hidden="true" aria-modal="true" aria-labelledby="infoPanel:popup_title"><div class="ui-dialog-titlebar ui-widget-header ui-helper-clearfix ui-corner-top"><div id="infoPanel:popup_title" class="ui-dialog-title">
+        <h1><span id="infoPanel:title" class="title">
+                Info
+            </span>
+        </h1></div><a href="#" class="ui-dialog-titlebar-icon ui-dialog-titlebar-close ui-corner-all" aria-label="Lukk" role="button"><span class="ui-icon ui-icon-closethick"></span></a></div><div class="ui-dialog-content ui-widget-content" id="infoPanel:popup_content">
+    <a href="#" id="focus_link_infoPanel" style="display: block;">&amp;nbsp;</a>
+    
+    <div class="content">
+
+<script src="/studentweb/resources/js/spin.min.js"></script>
+
+<div id="j_idt30_spinner" class="funSpinner" style="display: inline-block; width: 40px; height: 40px; vertical-align: middle; display: none; margin-right: 10px;">
+    <div id="j_idt30_spinner_center" class="funSpinnerCenter" style="top: 20.0px; left: 20.0px; position: relative;"><div class="spinner" role="progressbar" style="position: absolute; width: 0px; z-index: 2000000000; left: auto; top: auto;"><div style="position: absolute; top: -2px; opacity: 0.25; animation: 1.25s linear 0s infinite normal none running opacity-50-25-0-13;"><div style="position: absolute; width: 12px; height: 4px; background: rgb(68, 68, 68); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center; transform: rotate(0deg) translate(8px, 0px); border-radius: 2px;"></div></div><div style="position: absolute; top: -2px; opacity: 0.25; animation: 1.25s linear 0s infinite normal none running opacity-50-25-1-13;"><div style="position: absolute; width: 12px; height: 4px; background: rgb(68, 68, 68); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center; transform: rotate(27deg) translate(8px, 0px); border-radius: 2px;"></div></div><div style="position: absolute; top: -2px; opacity: 0.25; animation: 1.25s linear 0s infinite normal none running opacity-50-25-2-13;"><div style="position: absolute; width: 12px; height: 4px; background: rgb(68, 68, 68); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center; transform: rotate(55deg) translate(8px, 0px); border-radius: 2px;"></div></div><div style="position: absolute; top: -2px; opacity: 0.25; animation: 1.25s linear 0s infinite normal none running opacity-50-25-3-13;"><div style="position: absolute; width: 12px; height: 4px; background: rgb(68, 68, 68); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center; transform: rotate(83deg) translate(8px, 0px); border-radius: 2px;"></div></div><div style="position: absolute; top: -2px; opacity: 0.25; animation: 1.25s linear 0s infinite normal none running opacity-50-25-4-13;"><div style="position: absolute; width: 12px; height: 4px; background: rgb(68, 68, 68); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center; transform: rotate(110deg) translate(8px, 0px); border-radius: 2px;"></div></div><div style="position: absolute; top: -2px; opacity: 0.25; animation: 1.25s linear 0s infinite normal none running opacity-50-25-5-13;"><div style="position: absolute; width: 12px; height: 4px; background: rgb(68, 68, 68); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center; transform: rotate(138deg) translate(8px, 0px); border-radius: 2px;"></div></div><div style="position: absolute; top: -2px; opacity: 0.25; animation: 1.25s linear 0s infinite normal none running opacity-50-25-6-13;"><div style="position: absolute; width: 12px; height: 4px; background: rgb(68, 68, 68); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center; transform: rotate(166deg) translate(8px, 0px); border-radius: 2px;"></div></div><div style="position: absolute; top: -2px; opacity: 0.25; animation: 1.25s linear 0s infinite normal none running opacity-50-25-7-13;"><div style="position: absolute; width: 12px; height: 4px; background: rgb(68, 68, 68); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center; transform: rotate(193deg) translate(8px, 0px); border-radius: 2px;"></div></div><div style="position: absolute; top: -2px; opacity: 0.25; animation: 1.25s linear 0s infinite normal none running opacity-50-25-8-13;"><div style="position: absolute; width: 12px; height: 4px; background: rgb(68, 68, 68); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center; transform: rotate(221deg) translate(8px, 0px); border-radius: 2px;"></div></div><div style="position: absolute; top: -2px; opacity: 0.25; animation: 1.25s linear 0s infinite normal none running opacity-50-25-9-13;"><div style="position: absolute; width: 12px; height: 4px; background: rgb(68, 68, 68); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center; transform: rotate(249deg) translate(8px, 0px); border-radius: 2px;"></div></div><div style="position: absolute; top: -2px; opacity: 0.25; animation: 1.25s linear 0s infinite normal none running opacity-50-25-10-13;"><div style="position: absolute; width: 12px; height: 4px; background: rgb(68, 68, 68); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center; transform: rotate(276deg) translate(8px, 0px); border-radius: 2px;"></div></div><div style="position: absolute; top: -2px; opacity: 0.25; animation: 1.25s linear 0s infinite normal none running opacity-50-25-11-13;"><div style="position: absolute; width: 12px; height: 4px; background: rgb(68, 68, 68); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center; transform: rotate(304deg) translate(8px, 0px); border-radius: 2px;"></div></div><div style="position: absolute; top: -2px; opacity: 0.25; animation: 1.25s linear 0s infinite normal none running opacity-50-25-12-13;"><div style="position: absolute; width: 12px; height: 4px; background: rgb(68, 68, 68); box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 1px; transform-origin: left center; transform: rotate(332deg) translate(8px, 0px); border-radius: 2px;"></div></div></div></div>
+</div>
+
+<script>
+    if (typeof funSpinner === "undefined") {
+        funSpinner = {};
+    }
+    spinOptions.width  = Math.floor(2*3.1415926*10.0/spinOptions.lines);
+    spinOptions.radius = 10.0 - spinOptions.width/2;
+    spinOptions.length = 10.0 - spinOptions.width/2;
+    funSpinner['j_idt30'] = new Spinner(spinOptions).spin();
+    var currentScript = document.currentScript || (function() {
+        var scripts = document.getElementsByTagName('script');
+        return scripts[scripts.length - 1];
+    })();
+    jQuery(currentScript).prev('.funSpinner').find('.funSpinnerCenter').append(funSpinner['j_idt30'].el);
+</script>
+
+<div style="display: inline-block; vertical-align: top;"><span id="infoPanel:infoPanel_text"></span></div>
+    </div></div></div>
+<a id="top"></a>
+<header>
+<form id="j_idt64:j_idt77:j_idt111" name="j_idt64:j_idt77:j_idt111" method="post" action="/studentweb/resultater.jsf" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="j_idt64:j_idt77:j_idt111" value="j_idt64:j_idt77:j_idt111">
+
+    <div id="bar-wrap">
+        <div id="bar" data-menubarcreated="created"><a href="#" id="menuOpener" class="c-hamburger c-hamburger--htx linkAsButtonFlag" role="button" aria-expanded="false" aria-label="Meny" data-menuitem="0"><span></span></a><nav id="menuBarLeft" style="display: none;"><ul class="mainmenu"><li><a href="/studentweb/studier.jsf" class="dropdown-link">Studier</a></li><li><a href="/studentweb/aktiveemner.jsf" class="dropdown-link">Aktive emner</a></li><li class="active"><a href="/studentweb/resultater.jsf" class="dropdown-link">Resultater</a></li><li class="dropdown submenu-wrapper"><button type="button" class="dropdown-link arrow" aria-expanded="false">Mer...</button><div class="dropdown-wrapper"><ul class="submenu"><li><a href="/studentweb/klageoversikt.jsf">Begrunnelse og klager</a></li><li><a href="/studentweb/bestillinger.jsf">Bestillinger</a></li><li><a href="/studentweb/betaling.jsf">Betaling</a></li><li><a href="/studentweb/dokumentarkiv.jsf">Dokumenter</a></li><li><a href="/studentweb/sporreundersokelse.jsf">Spørreundersøkelse</a></li></ul></div></li><li class="submenuMobile"><a href="/studentweb/klageoversikt.jsf" class="dropdown-link">Begrunnelse og klager</a></li><li class="submenuMobile"><a href="/studentweb/bestillinger.jsf" class="dropdown-link">Bestillinger</a></li><li class="submenuMobile"><a href="/studentweb/betaling.jsf" class="dropdown-link">Betaling</a></li><li class="submenuMobile"><a href="/studentweb/dokumentarkiv.jsf" class="dropdown-link">Dokumenter</a></li><li class="submenuMobile"><a href="/studentweb/sporreundersokelse.jsf" class="dropdown-link" style="border-bottom: 0px; margin-bottom: 0px;">Spørreundersøkelse</a></li></ul></nav>
+            <div id="menuBarRight">
+
+<script>
+
+/* HOVEDMENY
+    
+    Hver menuitem har
+    1) teksten som skal vises
+    2) selve lenken
+    3) hvilke sider som skal trigge at menyen blir forhåndsvalgt (filnavnet uten / og uten .jsf og parametere)
+    4) om menyen skal vises, her kan man bruke en EL-expression
+    5) submenyer skal ikke brukes
+*/
+var menuitems = [
+    [ 'Velg institusjon', '/velgInstitusjon.jsf', 'velgInstitusjon', false],
+    [ 'Pålogging', '/login.jsf', 'login', false],
+    [ 'Studier', '/studier.jsf', 'studier,utdanningsplan', true],
+    [ 'Aktive emner','/aktiveemner.jsf', 'emner', true],
+    [ 'Resultater','/resultater.jsf', 'resultater,karakterUtskriftBestilling,rapportertLanekassen', true],
+    [ 'Mer...','', 'mer', true, [
+        [ 'Dokumenter','/dokumentarkiv.jsf', 'dokumentarkiv', true],
+        [ 'Betaling','/betaling.jsf','betaling',true],
+        [ "Spørreundersøkelse",'/sporreundersokelse.jsf','sporreskjema',true],
+        [ "Oppgavelevering",'/oppgaveinnlevering.jsf','oppgaveinnlevering',false],
+        [ "Søknader",'/soknader.jsf','soknader',false],
+        [ "Bestillinger",'/bestillinger.jsf','bestillinger',true],
+        [ "Oppmøte", '/oppmote.jsf', 'oppmote', false],
+        [ "Begrunnelse og klager", '/klageoversikt.jsf', 'klage', true],
+    ]],
+];
+
+
+jQuery(window).ready(function() {
+    jQuery('nav#menuBarLeft a').on('click', function(event) {
+        var href = jQuery(this).attr('href');
+        navigerTilSide(event, href, 'Laster data', 'Vennligst vent...');
+    });
+
+    menuitems[5][4].sort();
+    createMenu(null, menuitems, '/studentweb', '/resultater.jsf', '');
+    createFooterNavigation(menuitems.reverse(), '/studentweb');
+});
+
+</script>
+<div class="dropdown">
+    <a class="dropdown-link arrow linkAsButtonFlag" href="#" role="button" aria-expanded="false" data-menuitem="0">
+    Norsk bokmål
+
+    </a>
+    <div class="dropdown-wrapper">
+<ul>
+        <li class="nolink">Norsk bokmål
+        </li>
+        <li><script type="text/javascript" src="/studentweb/javax.faces.resource/jsf.js.jsf?ln=javax.faces"></script><a href="#" onclick="jsf.util.chain(this,event,'fixPageShouldConfirmCancel(false);','mojarra.jsfcljs(document.getElementById(\'j_idt64:j_idt77:j_idt111\'),{\'j_idt64:j_idt77:j_idt111:j_idt79:j_idt82:1:j_idt84\':\'j_idt64:j_idt77:j_idt111:j_idt79:j_idt82:1:j_idt84\'},\'\')');return false" data-menuitem="1">Norsk nynorsk</a>
+        </li>
+        <li><a href="#" onclick="jsf.util.chain(this,event,'fixPageShouldConfirmCancel(false);','mojarra.jsfcljs(document.getElementById(\'j_idt64:j_idt77:j_idt111\'),{\'j_idt64:j_idt77:j_idt111:j_idt79:j_idt82:2:j_idt84\':\'j_idt64:j_idt77:j_idt111:j_idt79:j_idt82:2:j_idt84\'},\'\')');return false" data-menuitem="2">English</a>
+        </li>
+</ul>
+    </div>
+</div>
+<div class="dropdown">
+    <a class="dropdown-link arrow linkAsButtonFlag" href="#" role="button" aria-expanded="false" data-menuitem="0">
+    <img alt="Logget inn" title="Logget inn" src="./resources/img/icons_d/24x24/User-24x24.png" class="iconHover">
+    Anders Rudolfsen
+    
+
+    </a>
+    <div class="dropdown-wrapper">
+<ul class="brukerMeny">
+    <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('j_idt64:j_idt77:j_idt111'),{'j_idt64:j_idt77:j_idt111:j_idt92:j_idt95':'j_idt64:j_idt77:j_idt111:j_idt92:j_idt95'},'');return false" data-menuitem="1">Min profil</a>
+    </li>
+    <li><a href="#" onclick="jsf.util.chain(this,event,'clearSessionStorage();','mojarra.jsfcljs(document.getElementById(\'j_idt64:j_idt77:j_idt111\'),{\'j_idt64:j_idt77:j_idt111:j_idt92:j_idt105\':\'j_idt64:j_idt77:j_idt111:j_idt92:j_idt105\'},\'\')');return false" data-menuitem="2">Logg ut</a>
+    </li>
+</ul>
+    </div>
+</div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        jQuery(window).ready(function() {
+            jQuery('.dropdown-link img').addClass('iconHover');
+            jQuery('.dropdown-wrapper li:not(:has(>a))').addClass('nolink');
+            jQuery('div#bar nav .dropdown-link:last').css('border-bottom', 0).css('margin-bottom', 0);
+        });
+    </script><input type="hidden" name="javax.faces.ViewState" id="j_id1:javax.faces.ViewState:0" value="5983889490698968133:-7636670621407700783" autocomplete="off">
+</form>
+
+    <div class="container">
+        <a href="/studentweb/">
+                <img src="https://fsws.usit.no/fellesws/logo?inst=FSHSN&amp;malform=BOKM%C3%85L" class="logo" alt="">
+            <div id="pageTitleContainer">
+                    <div id="pageTitle">
+                        Studentweb
+                        
+                    </div>
+                    <div id="pageSubtitle">
+                        Universitetet i Sørøst-Norge
+                    </div>
+            </div>
+        </a>
+        <div class="headerFacetContent">
+            <div class="saksbehandlerContainer"> 
+              </div>
+         </div>
+    </div>
+</header>
+
+<div class="container">
+
+  
+  <main><div id="messagesPanelGroup">
+          <script>
+            setFeedbackPanelColor();
+          </script></div>
+     <div id="content"><span id="clientSideRedirectWrapper"></span>
+<h1 id="mineResultaterTittel">Resultater</h1>
+<form id="kvalifikasjonerForm" name="kvalifikasjonerForm" method="post" action="/studentweb/resultater.jsf" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="kvalifikasjonerForm" value="kvalifikasjonerForm">
+
+<p>Oppnådde kvalifikasjoner er følgende:</p>
+
+<ul>
+            <li>Master of Science,
+                Master of Science, Industrial IT and Automation,
+                06.06.2024 
+                , Dato utskrift: 13.06.2024 
+            </li>
+            <li>Bachelor i ingeniørfag,
+                Elektro,
+                02.06.2022 
+                , Dato utskrift: 28.06.2022 
+            </li>
+            <li>Forkurs til ingeniørutdanning,
+                Forkurs for ingeniør- og sivilingeniørutdanning,
+                23.06.2016
+            </li>
+</ul><input type="hidden" name="javax.faces.ViewState" id="j_id1:javax.faces.ViewState:1" value="5983889490698968133:-7636670621407700783" autocomplete="off">
+</form><div class="left-side link-wrapper">
+<p class="brodtekst-maks-lengde">Ønsker du å be om begrunnelse på sensur eller klage på sensur eller formelle feil via Studentweb, se siden 
+    <a href="klageoversikt.jsf" class="link">
+        Begrunnelse og klager
+    </a>
+</p></div>
+    <div>
+        <a href="https://min.usn.no/student/tjenester-for-studenter/administrering-av-dine-studier/eksamen/etter-eksamen/klage-og-begrunnelse-for-studenter" class="link externalLink vertical-spacing" target="_blank">
+            Informasjon om begrunnelser og klager
+        </a>
+    </div>
+<form id="resultatlisteForm" name="resultatlisteForm" method="post" action="/studentweb/resultater.jsf" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="resultatlisteForm" value="resultatlisteForm">
+
+<fieldset class="visningResultat">
+<legend>
+    Hvilke resultater vil du se?
+</legend><table id="resultatlisteForm:j_idt156" class="radioknapper excludeNavigationCheck" role="presentation">
+<tbody><tr style="border: none;">
+<td style="border: none;">
+<input type="radio" name="resultatlisteForm:j_idt156" id="resultatlisteForm:j_idt156:0" value="kunGyldig" onclick="PrimeFaces.ab({s:this,e:&quot;valueChange&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt156&quot;,u:&quot;resultatlisteForm:resultatlisteWrapper&quot;,onst:function(cfg){saveFocusElement(); showInfoPanel('Laster data', 'Vennligst vent...', 'false', 'true');;},onco:function(xhr,status,args,data){hideInfoPanel(); fixWidths(); giveFocusToSavedFocusElement();;}});"><label for="resultatlisteForm:j_idt156:0"> Bare gyldige</label></td>
+<td style="border: none;">
+<input type="radio" checked="checked" name="resultatlisteForm:j_idt156" id="resultatlisteForm:j_idt156:1" value="alle" onclick="PrimeFaces.ab({s:this,e:&quot;valueChange&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt156&quot;,u:&quot;resultatlisteForm:resultatlisteWrapper&quot;,onst:function(cfg){saveFocusElement(); showInfoPanel('Laster data', 'Vennligst vent...', 'false', 'true');;},onco:function(xhr,status,args,data){hideInfoPanel(); fixWidths(); giveFocusToSavedFocusElement();;}});"><label for="resultatlisteForm:j_idt156:1"> Alle</label></td>
+</tr>
+</tbody></table>
+</fieldset><div id="resultatlisteForm:resultatlisteWrapper"><div class="ui-panel" style="margin-bottom: 20px;"><table class="table-standard reflow ui-panel-content">
+<caption>
+        <div class="ui-panel-titlebar ui-widget-header ui-corner-all">
+            Resultater
+        </div></caption><thead>
+<tr>
+<th scope="col">Semester</th>
+<th scope="col">Emne</th>
+<th scope="col">Vurderingsgrunnlag</th>
+<th scope="col">Dato</th>
+<th class="textAlignRight" scope="col">Kand.nr</th>
+<th class="textAlignRight" scope="col">Resultat</th>
+<th class="textAlignRight" scope="col">stp.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="resultatTop">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title">Semester</div>
+        <div class="uuHidden">2024 VÅR</div>
+        <div aria-hidden="true">2024 VÅR</div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">FMH606</div>
+            <div class="infoLinje" aria-hidden="true">FMH606</div>
+            <div class="infoLinje">Master's Thesis</div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="">Master´s Thesis</span></td>
+<td class="col4ResultatDato">
+            <div aria-hidden="true" class="ui-column-title">Dato</div><span class="">15.05.2024</span></td>
+<td class="col5Kandnr textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Kand.nr</div><span class="">8268</span></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:0:j_idt196" name="resultatlisteForm:j_idt163:0:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:0:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:0:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for FMH606</span></button>
+        <div class="infoLinje"><span class="">B</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Studiepoeng</div><span class="">30</span></td>
+</tr>
+<tr class="resultat">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title del-title">Del:</div>
+        <div class="uuHidden">2024 VÅR</div>
+        <div aria-hidden="true"></div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">FMH606</div>
+            <div class="infoLinje" aria-hidden="true"></div>
+            <div class="infoLinje"></div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="vurderingsdelInfo uuHiddenMobile">Del: </span><span class="vurderingsdelInfo">EXPO - poster</span></td>
+<td class="col4ResultatDato"></td>
+<td class="col5Kandnr textAlignRight"></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:1:j_idt196" name="resultatlisteForm:j_idt163:1:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:1:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:1:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for </span></button>
+        <div class="infoLinje"><span class="vurderingsdelInfo">Godkjent</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight"></td>
+</tr>
+<tr class="none">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title">Semester</div>
+        <div class="uuHidden">2023 HØST</div>
+        <div aria-hidden="true">2023 HØST</div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">FM4017</div>
+            <div class="infoLinje" aria-hidden="true">FM4017</div>
+            <div class="infoLinje">Project</div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="">Project</span></td>
+<td class="col4ResultatDato">
+            <div aria-hidden="true" class="ui-column-title">Dato</div><span class="">20.11.2023</span></td>
+<td class="col5Kandnr textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Kand.nr</div><span class="">8082</span></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:2:j_idt196" name="resultatlisteForm:j_idt163:2:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:2:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:2:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for FM4017</span></button>
+        <div class="infoLinje"><span class="">A</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Studiepoeng</div><span class="">10</span></td>
+</tr>
+<tr class="none">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title">Semester</div>
+        <div class="uuHidden">2023 HØST</div>
+        <div aria-hidden="true">2023 HØST</div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">IIA3220</div>
+            <div class="infoLinje" aria-hidden="true">IIA3220</div>
+            <div class="infoLinje">Internet of Things and Cyber Security</div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="">Continuous Assessment</span></td>
+<td class="col4ResultatDato"></td>
+<td class="col5Kandnr textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Kand.nr</div><span class="">8014</span></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:3:j_idt196" name="resultatlisteForm:j_idt163:3:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:3:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:3:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for IIA3220</span></button>
+        <div class="infoLinje"><span class="">Bestått</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Studiepoeng</div><span class="">5</span></td>
+</tr>
+<tr class="none">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title">Semester</div>
+        <div class="uuHidden">2023 HØST</div>
+        <div aria-hidden="true">2023 HØST</div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">IIA4117</div>
+            <div class="infoLinje" aria-hidden="true">IIA4117</div>
+            <div class="infoLinje">Model Predictive Control</div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="">Continuous Assessment</span></td>
+<td class="col4ResultatDato">
+            <div aria-hidden="true" class="ui-column-title">Dato</div><span class="">28.11.2023</span></td>
+<td class="col5Kandnr textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Kand.nr</div><span class="">8015</span></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:4:j_idt196" name="resultatlisteForm:j_idt163:4:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:4:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:4:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for IIA4117</span></button>
+        <div class="infoLinje"><span class="">C</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Studiepoeng</div><span class="">5</span></td>
+</tr>
+<tr class="none">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title">Semester</div>
+        <div class="uuHidden">2023 HØST</div>
+        <div aria-hidden="true">2023 HØST</div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">IIAV3120</div>
+            <div class="infoLinje" aria-hidden="true">IIAV3120</div>
+            <div class="infoLinje">Control for Robotic</div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="">Continuous Assessment</span></td>
+<td class="col4ResultatDato">
+            <div aria-hidden="true" class="ui-column-title">Dato</div><span class="">13.12.2023</span></td>
+<td class="col5Kandnr textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Kand.nr</div><span class="">8017</span></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div>
+        <div class="infoLinje"><span class="">A</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Studiepoeng</div><span class="">5</span></td>
+</tr>
+<tr class="resultatTop">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title">Semester</div>
+        <div class="uuHidden">2023 HØST</div>
+        <div aria-hidden="true">2023 HØST</div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">ITA5900</div>
+            <div class="infoLinje" aria-hidden="true">ITA5900</div>
+            <div class="infoLinje">Introduction to Autonomy</div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="">Written project report</span></td>
+<td class="col4ResultatDato">
+            <div aria-hidden="true" class="ui-column-title">Dato</div><span class="">19.12.2023</span></td>
+<td class="col5Kandnr textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Kand.nr</div><span class="">8524</span></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:6:j_idt196" name="resultatlisteForm:j_idt163:6:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:6:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:6:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for ITA5900</span></button>
+        <div class="infoLinje"><span class="">B</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Studiepoeng</div><span class="">7,5</span></td>
+</tr>
+<tr class="resultat">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title del-title">Del:</div>
+        <div class="uuHidden">2023 HØST</div>
+        <div aria-hidden="true"></div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">ITA5900</div>
+            <div class="infoLinje" aria-hidden="true"></div>
+            <div class="infoLinje"></div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="vurderingsdelInfo uuHiddenMobile">Del: </span><span class="vurderingsdelInfo">Obligatorisk arbeidskrav</span></td>
+<td class="col4ResultatDato"></td>
+<td class="col5Kandnr textAlignRight"></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:7:j_idt196" name="resultatlisteForm:j_idt163:7:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:7:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:7:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for </span></button>
+        <div class="infoLinje"><span class="vurderingsdelInfo">Godkjent</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight"></td>
+</tr>
+<tr class="resultatTop">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title">Semester</div>
+        <div class="uuHidden">2023 VÅR</div>
+        <div aria-hidden="true">2023 VÅR</div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">IIA1319</div>
+            <div class="infoLinje" aria-hidden="true">IIA1319</div>
+            <div class="infoLinje">Software Engineering</div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="">Overall assessment</span></td>
+<td class="col4ResultatDato"></td>
+<td class="col5Kandnr textAlignRight"></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:8:j_idt196" name="resultatlisteForm:j_idt163:8:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:8:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:8:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for IIA1319</span></button>
+        <div class="infoLinje"><span class="">C</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Studiepoeng</div><span class="">5</span></td>
+</tr>
+<tr class="resultat">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title del-title">Del:</div>
+        <div class="uuHidden">2023 VÅR</div>
+        <div aria-hidden="true"></div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">IIA1319</div>
+            <div class="infoLinje" aria-hidden="true"></div>
+            <div class="infoLinje"></div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="vurderingsdelInfo uuHiddenMobile">Del: </span><span class="vurderingsdelInfo">Written Exam</span></td>
+<td class="col4ResultatDato">
+            <div aria-hidden="true" class="ui-column-title">Dato</div><span class="vurderingsdelInfo">08.06.2023</span></td>
+<td class="col5Kandnr textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Kand.nr</div><span class="vurderingsdelInfo">8019</span></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:9:j_idt196" name="resultatlisteForm:j_idt163:9:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:9:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:9:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for </span></button>
+        <div class="infoLinje"><span class="vurderingsdelInfo">C</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight"></td>
+</tr>
+<tr class="resultat">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title del-title">Del:</div>
+        <div class="uuHidden">2023 VÅR</div>
+        <div aria-hidden="true"></div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">IIA1319</div>
+            <div class="infoLinje" aria-hidden="true"></div>
+            <div class="infoLinje"></div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="vurderingsdelInfo uuHiddenMobile">Del: </span><span class="vurderingsdelInfo">Compulsory assignments</span></td>
+<td class="col4ResultatDato"></td>
+<td class="col5Kandnr textAlignRight"></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:10:j_idt196" name="resultatlisteForm:j_idt163:10:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:10:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:10:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for </span></button>
+        <div class="infoLinje"><span class="vurderingsdelInfo">Godkjent</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight"></td>
+</tr>
+<tr class="none">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title">Semester</div>
+        <div class="uuHidden">2023 VÅR</div>
+        <div aria-hidden="true">2023 VÅR</div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">IIA2017</div>
+            <div class="infoLinje" aria-hidden="true">IIA2017</div>
+            <div class="infoLinje">Industrial Information Technology</div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="">Continuous Assessment</span></td>
+<td class="col4ResultatDato">
+            <div aria-hidden="true" class="ui-column-title">Dato</div><span class="">22.05.2023</span></td>
+<td class="col5Kandnr textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Kand.nr</div><span class="">8033</span></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:11:j_idt196" name="resultatlisteForm:j_idt163:11:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:11:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:11:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for IIA2017</span></button>
+        <div class="infoLinje"><span class="">A</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Studiepoeng</div><span class="">10</span></td>
+</tr>
+<tr class="none">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title">Semester</div>
+        <div class="uuHidden">2023 VÅR</div>
+        <div aria-hidden="true">2023 VÅR</div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">IIA2117</div>
+            <div class="infoLinje" aria-hidden="true">IIA2117</div>
+            <div class="infoLinje">Multivariate Data Analysis</div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="">Continuous Assessment</span></td>
+<td class="col4ResultatDato">
+            <div aria-hidden="true" class="ui-column-title">Dato</div><span class="">31.05.2023</span></td>
+<td class="col5Kandnr textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Kand.nr</div><span class="">8006</span></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:12:j_idt196" name="resultatlisteForm:j_idt163:12:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:12:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:12:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for IIA2117</span></button>
+        <div class="infoLinje"><span class="">C</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Studiepoeng</div><span class="">5</span></td>
+</tr>
+<tr class="resultatTop">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title">Semester</div>
+        <div class="uuHidden">2023 VÅR</div>
+        <div aria-hidden="true">2023 VÅR</div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">IIA2217</div>
+            <div class="infoLinje" aria-hidden="true">IIA2217</div>
+            <div class="infoLinje">System Identification and Optimal Estimation</div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="">Overall assessment</span></td>
+<td class="col4ResultatDato"></td>
+<td class="col5Kandnr textAlignRight"></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:13:j_idt196" name="resultatlisteForm:j_idt163:13:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:13:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:13:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for IIA2217</span></button>
+        <div class="infoLinje"><span class="">C</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Studiepoeng</div><span class="">10</span></td>
+</tr>
+<tr class="resultat">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title del-title">Del:</div>
+        <div class="uuHidden">2023 VÅR</div>
+        <div aria-hidden="true"></div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">IIA2217</div>
+            <div class="infoLinje" aria-hidden="true"></div>
+            <div class="infoLinje"></div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="vurderingsdelInfo uuHiddenMobile">Del: </span><span class="vurderingsdelInfo">Written Exam</span></td>
+<td class="col4ResultatDato">
+            <div aria-hidden="true" class="ui-column-title">Dato</div><span class="vurderingsdelInfo">26.05.2023</span></td>
+<td class="col5Kandnr textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Kand.nr</div><span class="vurderingsdelInfo">8001</span></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:14:j_idt196" name="resultatlisteForm:j_idt163:14:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:14:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:14:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for </span></button>
+        <div class="infoLinje"><span class="vurderingsdelInfo">C</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight"></td>
+</tr>
+<tr class="resultat">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title del-title">Del:</div>
+        <div class="uuHidden">2023 VÅR</div>
+        <div aria-hidden="true"></div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">IIA2217</div>
+            <div class="infoLinje" aria-hidden="true"></div>
+            <div class="infoLinje"></div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="vurderingsdelInfo uuHiddenMobile">Del: </span><span class="vurderingsdelInfo">Assignments</span></td>
+<td class="col4ResultatDato"></td>
+<td class="col5Kandnr textAlignRight"></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:15:j_idt196" name="resultatlisteForm:j_idt163:15:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:15:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:15:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for </span></button>
+        <div class="infoLinje"><span class="vurderingsdelInfo">Godkjent</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight"></td>
+</tr>
+<tr class="none">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title">Semester</div>
+        <div class="uuHidden">2022 HØST</div>
+        <div aria-hidden="true">2022 HØST</div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">FM1015</div>
+            <div class="infoLinje" aria-hidden="true">FM1015</div>
+            <div class="infoLinje">Modelling of Dynamic Systems</div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="">Continuous Assessment</span></td>
+<td class="col4ResultatDato">
+            <div aria-hidden="true" class="ui-column-title">Dato</div><span class="">02.12.2022</span></td>
+<td class="col5Kandnr textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Kand.nr</div><span class="">8303</span></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:16:j_idt196" name="resultatlisteForm:j_idt163:16:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:16:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:16:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for FM1015</span></button>
+        <div class="infoLinje"><span class="">B</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Studiepoeng</div><span class="">5</span></td>
+</tr>
+<tr class="resultatTop">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title">Semester</div>
+        <div class="uuHidden">2022 HØST</div>
+        <div aria-hidden="true">2022 HØST</div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">FM1115</div>
+            <div class="infoLinje" aria-hidden="true">FM1115</div>
+            <div class="infoLinje">Scientific Computing</div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="">Overall assessment</span></td>
+<td class="col4ResultatDato"></td>
+<td class="col5Kandnr textAlignRight"></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:17:j_idt196" name="resultatlisteForm:j_idt163:17:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:17:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:17:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for FM1115</span></button>
+        <div class="infoLinje"><span class="">A</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Studiepoeng</div><span class="">5</span></td>
+</tr>
+<tr class="resultat">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title del-title">Del:</div>
+        <div class="uuHidden">2022 HØST</div>
+        <div aria-hidden="true"></div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">FM1115</div>
+            <div class="infoLinje" aria-hidden="true"></div>
+            <div class="infoLinje"></div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="vurderingsdelInfo uuHiddenMobile">Del: </span><span class="vurderingsdelInfo">Compulsory project</span></td>
+<td class="col4ResultatDato"></td>
+<td class="col5Kandnr textAlignRight"></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:18:j_idt196" name="resultatlisteForm:j_idt163:18:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:18:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:18:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for </span></button>
+        <div class="infoLinje"><span class="vurderingsdelInfo">Godkjent</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight"></td>
+</tr>
+<tr class="resultat">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title del-title">Del:</div>
+        <div class="uuHidden">2022 HØST</div>
+        <div aria-hidden="true"></div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">FM1115</div>
+            <div class="infoLinje" aria-hidden="true"></div>
+            <div class="infoLinje"></div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="vurderingsdelInfo uuHiddenMobile">Del: </span><span class="vurderingsdelInfo">Written exam</span></td>
+<td class="col4ResultatDato">
+            <div aria-hidden="true" class="ui-column-title">Dato</div><span class="vurderingsdelInfo">06.12.2022</span></td>
+<td class="col5Kandnr textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Kand.nr</div><span class="vurderingsdelInfo">6072</span></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:19:j_idt196" name="resultatlisteForm:j_idt163:19:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:19:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:19:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for </span></button>
+        <div class="infoLinje"><span class="vurderingsdelInfo">A</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight"></td>
+</tr>
+<tr class="resultatTop">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title">Semester</div>
+        <div class="uuHidden">2022 HØST</div>
+        <div aria-hidden="true">2022 HØST</div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">FM1220</div>
+            <div class="infoLinje" aria-hidden="true">FM1220</div>
+            <div class="infoLinje">Automatic Control</div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="">Overall assessment</span></td>
+<td class="col4ResultatDato"></td>
+<td class="col5Kandnr textAlignRight"></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:20:j_idt196" name="resultatlisteForm:j_idt163:20:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:20:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:20:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for FM1220</span></button>
+        <div class="infoLinje"><span class="">B</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Studiepoeng</div><span class="">5</span></td>
+</tr>
+<tr class="resultat">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title del-title">Del:</div>
+        <div class="uuHidden">2022 HØST</div>
+        <div aria-hidden="true"></div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">FM1220</div>
+            <div class="infoLinje" aria-hidden="true"></div>
+            <div class="infoLinje"></div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="vurderingsdelInfo uuHiddenMobile">Del: </span><span class="vurderingsdelInfo">Written Exam</span></td>
+<td class="col4ResultatDato">
+            <div aria-hidden="true" class="ui-column-title">Dato</div><span class="vurderingsdelInfo">13.12.2022</span></td>
+<td class="col5Kandnr textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Kand.nr</div><span class="vurderingsdelInfo">6092</span></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:21:j_idt196" name="resultatlisteForm:j_idt163:21:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:21:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:21:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for </span></button>
+        <div class="infoLinje"><span class="vurderingsdelInfo">B</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight"></td>
+</tr>
+<tr class="resultat">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title del-title">Del:</div>
+        <div class="uuHidden">2022 HØST</div>
+        <div aria-hidden="true"></div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">FM1220</div>
+            <div class="infoLinje" aria-hidden="true"></div>
+            <div class="infoLinje"></div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="vurderingsdelInfo uuHiddenMobile">Del: </span><span class="vurderingsdelInfo">Compulsory assignments</span></td>
+<td class="col4ResultatDato"></td>
+<td class="col5Kandnr textAlignRight"></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:22:j_idt196" name="resultatlisteForm:j_idt163:22:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:22:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:22:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for </span></button>
+        <div class="infoLinje"><span class="vurderingsdelInfo">Godkjent</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight"></td>
+</tr>
+<tr class="resultatTop">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title">Semester</div>
+        <div class="uuHidden">2022 HØST</div>
+        <div aria-hidden="true">2022 HØST</div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">FM3110</div>
+            <div class="infoLinje" aria-hidden="true">FM3110</div>
+            <div class="infoLinje">Project Management and Cost Engineering</div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="">Overall assessment</span></td>
+<td class="col4ResultatDato"></td>
+<td class="col5Kandnr textAlignRight"></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:23:j_idt196" name="resultatlisteForm:j_idt163:23:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:23:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:23:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for FM3110</span></button>
+        <div class="infoLinje"><span class="">C</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Studiepoeng</div><span class="">5</span></td>
+</tr>
+<tr class="resultat">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title del-title">Del:</div>
+        <div class="uuHidden">2022 HØST</div>
+        <div aria-hidden="true"></div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">FM3110</div>
+            <div class="infoLinje" aria-hidden="true"></div>
+            <div class="infoLinje"></div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="vurderingsdelInfo uuHiddenMobile">Del: </span><span class="vurderingsdelInfo">Written exam</span></td>
+<td class="col4ResultatDato">
+            <div aria-hidden="true" class="ui-column-title">Dato</div><span class="vurderingsdelInfo">08.12.2022</span></td>
+<td class="col5Kandnr textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Kand.nr</div><span class="vurderingsdelInfo">6069</span></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:24:j_idt196" name="resultatlisteForm:j_idt163:24:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:24:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:24:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for </span></button>
+        <div class="infoLinje"><span class="vurderingsdelInfo">C</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight"></td>
+</tr>
+<tr class="resultatTop">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title">Semester</div>
+        <div class="uuHidden">2022 HØST</div>
+        <div aria-hidden="true">2022 HØST</div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">IIA1420</div>
+            <div class="infoLinje" aria-hidden="true">IIA1420</div>
+            <div class="infoLinje">Machine Learning and Sensor Technology</div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="">Overall assessment</span></td>
+<td class="col4ResultatDato"></td>
+<td class="col5Kandnr textAlignRight"></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:25:j_idt196" name="resultatlisteForm:j_idt163:25:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:25:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:25:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for IIA1420</span></button>
+        <div class="infoLinje"><span class="">C</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Studiepoeng</div><span class="">10</span></td>
+</tr>
+<tr class="resultat">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title del-title">Del:</div>
+        <div class="uuHidden">2022 HØST</div>
+        <div aria-hidden="true"></div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">IIA1420</div>
+            <div class="infoLinje" aria-hidden="true"></div>
+            <div class="infoLinje"></div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="vurderingsdelInfo uuHiddenMobile">Del: </span><span class="vurderingsdelInfo">Written Exam</span></td>
+<td class="col4ResultatDato">
+            <div aria-hidden="true" class="ui-column-title">Dato</div><span class="vurderingsdelInfo">29.11.2022</span></td>
+<td class="col5Kandnr textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Kand.nr</div><span class="vurderingsdelInfo">6016</span></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:26:j_idt196" name="resultatlisteForm:j_idt163:26:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:26:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:26:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for </span></button>
+        <div class="infoLinje"><span class="vurderingsdelInfo">C</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight"></td>
+</tr>
+<tr class="resultat">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title del-title">Del:</div>
+        <div class="uuHidden">2022 HØST</div>
+        <div aria-hidden="true"></div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">IIA1420</div>
+            <div class="infoLinje" aria-hidden="true"></div>
+            <div class="infoLinje"></div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="vurderingsdelInfo uuHiddenMobile">Del: </span><span class="vurderingsdelInfo">Assignments</span></td>
+<td class="col4ResultatDato"></td>
+<td class="col5Kandnr textAlignRight"></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:27:j_idt196" name="resultatlisteForm:j_idt163:27:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:27:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:27:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for </span></button>
+        <div class="infoLinje"><span class="vurderingsdelInfo">Godkjent</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight"></td>
+</tr>
+<tr class="none">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title">Semester</div>
+        <div class="uuHidden">2022 VÅR</div>
+        <div aria-hidden="true">2022 VÅR</div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">FE-BAC3000</div>
+            <div class="infoLinje" aria-hidden="true">FE-BAC3000</div>
+            <div class="infoLinje">Bacheloroppgave</div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="">Bacheloroppgave</span></td>
+<td class="col4ResultatDato">
+            <div aria-hidden="true" class="ui-column-title">Dato</div><span class="">20.05.2022</span></td>
+<td class="col5Kandnr textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Kand.nr</div><span class="">8050</span></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:28:j_idt196" name="resultatlisteForm:j_idt163:28:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:28:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:28:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for FE-BAC3000</span></button>
+        <div class="infoLinje"><span class="">B</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Studiepoeng</div><span class="">20</span></td>
+</tr>
+<tr class="resultatTop">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title">Semester</div>
+        <div class="uuHidden">2021 HØST</div>
+        <div aria-hidden="true">2021 HØST</div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">IA5617</div>
+            <div class="infoLinje" aria-hidden="true">IA5617</div>
+            <div class="infoLinje">Dynamic Simulation and Control Design</div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="">Løpende vurdering</span></td>
+<td class="col4ResultatDato">
+            <div aria-hidden="true" class="ui-column-title">Dato</div><span class="">01.12.2021</span></td>
+<td class="col5Kandnr textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Kand.nr</div><span class="">8007</span></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div>
+        <div class="infoLinje"><span class="">A</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Studiepoeng</div><span class="">10</span></td>
+</tr>
+<tr class="resultat">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title del-title">Del:</div>
+        <div class="uuHidden">2021 HØST</div>
+        <div aria-hidden="true"></div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">IA5617</div>
+            <div class="infoLinje" aria-hidden="true"></div>
+            <div class="infoLinje"></div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="vurderingsdelInfo uuHiddenMobile">Del: </span><span class="vurderingsdelInfo">Written Exam</span></td>
+<td class="col4ResultatDato">
+            <div aria-hidden="true" class="ui-column-title">Dato</div><span class="vurderingsdelInfo">01.12.2021</span></td>
+<td class="col5Kandnr textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Kand.nr</div><span class="vurderingsdelInfo">8007</span></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div>
+        <div class="infoLinje"><span class="vurderingsdelInfo">A</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight"></td>
+</tr>
+<tr class="resultat">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title del-title">Del:</div>
+        <div class="uuHidden">2021 HØST</div>
+        <div aria-hidden="true"></div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">IA5617</div>
+            <div class="infoLinje" aria-hidden="true"></div>
+            <div class="infoLinje"></div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="vurderingsdelInfo uuHiddenMobile">Del: </span><span class="vurderingsdelInfo">Project</span></td>
+<td class="col4ResultatDato"></td>
+<td class="col5Kandnr textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Kand.nr</div><span class="vurderingsdelInfo">8007</span></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div>
+        <div class="infoLinje"><span class="vurderingsdelInfo">A</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight"></td>
+</tr>
+<tr class="none">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title">Semester</div>
+        <div class="uuHidden">2021 VÅR</div>
+        <div aria-hidden="true">2021 VÅR</div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">EA-IAU3000</div>
+            <div class="infoLinje" aria-hidden="true">EA-IAU3000</div>
+            <div class="infoLinje">Industriell automasjon</div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="">Skriftlig rapport med muntlig presentasjon</span></td>
+<td class="col4ResultatDato">
+            <div aria-hidden="true" class="ui-column-title">Dato</div><span class="">22.02.2021</span></td>
+<td class="col5Kandnr textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Kand.nr</div><span class="">8009</span></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:32:j_idt196" name="resultatlisteForm:j_idt163:32:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:32:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:32:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for EA-IAU3000</span></button>
+        <div class="infoLinje"><span class="">B</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Studiepoeng</div><span class="">10</span></td>
+</tr>
+<tr class="resultatTop">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title">Semester</div>
+        <div class="uuHidden">2020 HØST</div>
+        <div aria-hidden="true">2020 HØST</div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">EAPHM3001</div>
+            <div class="infoLinje" aria-hidden="true">EAPHM3001</div>
+            <div class="infoLinje">PLS og HMI</div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="">Praktisk oppgave og muntlig høring</span></td>
+<td class="col4ResultatDato">
+            <div aria-hidden="true" class="ui-column-title">Dato</div><span class="">27.11.2020</span></td>
+<td class="col5Kandnr textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Kand.nr</div><span class="">8904</span></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:33:j_idt196" name="resultatlisteForm:j_idt163:33:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:33:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:33:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for EAPHM3001</span></button>
+        <div class="infoLinje"><span class="">A</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Studiepoeng</div><span class="">10</span></td>
+</tr>
+<tr class="resultat">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title del-title">Del:</div>
+        <div class="uuHidden">2020 HØST</div>
+        <div aria-hidden="true"></div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">EAPHM3001</div>
+            <div class="infoLinje" aria-hidden="true"></div>
+            <div class="infoLinje"></div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="vurderingsdelInfo uuHiddenMobile">Del: </span><span class="vurderingsdelInfo">Obligatorisk arbeidskrav</span></td>
+<td class="col4ResultatDato"></td>
+<td class="col5Kandnr textAlignRight"></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:34:j_idt196" name="resultatlisteForm:j_idt163:34:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:34:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:34:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for </span></button>
+        <div class="infoLinje"><span class="vurderingsdelInfo">Godkjent</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight"></td>
+</tr>
+<tr class="resultatTop">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title">Semester</div>
+        <div class="uuHidden">2020 HØST</div>
+        <div aria-hidden="true">2020 HØST</div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">FE-MAT3901</div>
+            <div class="infoLinje" aria-hidden="true">FE-MAT3901</div>
+            <div class="infoLinje">Matematikk III</div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="">Hjemmeeksamen</span></td>
+<td class="col4ResultatDato">
+            <div aria-hidden="true" class="ui-column-title">Dato</div><span class="">03.12.2020</span></td>
+<td class="col5Kandnr textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Kand.nr</div><span class="">8010</span></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:35:j_idt196" name="resultatlisteForm:j_idt163:35:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:35:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:35:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for FE-MAT3901</span></button>
+        <div class="infoLinje"><span class="">Bestått</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Studiepoeng</div><span class="">10</span></td>
+</tr>
+<tr class="resultat">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title del-title">Del:</div>
+        <div class="uuHidden">2020 HØST</div>
+        <div aria-hidden="true"></div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">FE-MAT3901</div>
+            <div class="infoLinje" aria-hidden="true"></div>
+            <div class="infoLinje"></div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="vurderingsdelInfo uuHiddenMobile">Del: </span><span class="vurderingsdelInfo">Obligatoriske arbeidsvalg</span></td>
+<td class="col4ResultatDato"></td>
+<td class="col5Kandnr textAlignRight"></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:36:j_idt196" name="resultatlisteForm:j_idt163:36:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:36:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:36:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for </span></button>
+        <div class="infoLinje"><span class="vurderingsdelInfo">Godkjent</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight"></td>
+</tr>
+<tr class="resultatTop">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title">Semester</div>
+        <div class="uuHidden">2020 VÅR</div>
+        <div aria-hidden="true">2020 VÅR</div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">EA-ELA2000</div>
+            <div class="infoLinje" aria-hidden="true">EA-ELA2000</div>
+            <div class="infoLinje">Elektriske anlegg</div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="">Samlet vurdering</span></td>
+<td class="col4ResultatDato"></td>
+<td class="col5Kandnr textAlignRight"></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:37:j_idt196" name="resultatlisteForm:j_idt163:37:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:37:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:37:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for EA-ELA2000</span></button>
+        <div class="infoLinje"><span class="">A</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Studiepoeng</div><span class="">15</span></td>
+</tr>
+<tr class="resultat">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title del-title">Del:</div>
+        <div class="uuHidden">2020 VÅR</div>
+        <div aria-hidden="true"></div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">EA-ELA2000</div>
+            <div class="infoLinje" aria-hidden="true"></div>
+            <div class="infoLinje"></div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="vurderingsdelInfo uuHiddenMobile">Del: </span><span class="vurderingsdelInfo">Prosjekt</span></td>
+<td class="col4ResultatDato">
+            <div aria-hidden="true" class="ui-column-title">Dato</div><span class="vurderingsdelInfo">11.05.2020</span></td>
+<td class="col5Kandnr textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Kand.nr</div><span class="vurderingsdelInfo">8025</span></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:38:j_idt196" name="resultatlisteForm:j_idt163:38:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:38:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:38:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for </span></button>
+        <div class="infoLinje"><span class="vurderingsdelInfo">B</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight"></td>
+</tr>
+<tr class="resultat">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title del-title">Del:</div>
+        <div class="uuHidden">2020 VÅR</div>
+        <div aria-hidden="true"></div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">EA-ELA2000</div>
+            <div class="infoLinje" aria-hidden="true"></div>
+            <div class="infoLinje"></div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="vurderingsdelInfo uuHiddenMobile">Del: </span><span class="vurderingsdelInfo">Obligatoriske krav</span></td>
+<td class="col4ResultatDato"></td>
+<td class="col5Kandnr textAlignRight"></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:39:j_idt196" name="resultatlisteForm:j_idt163:39:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:39:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:39:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for </span></button>
+        <div class="infoLinje"><span class="vurderingsdelInfo">Godkjent</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight"></td>
+</tr>
+<tr class="resultat">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title del-title">Del:</div>
+        <div class="uuHidden">2020 VÅR</div>
+        <div aria-hidden="true"></div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">EA-ELA2000</div>
+            <div class="infoLinje" aria-hidden="true"></div>
+            <div class="infoLinje"></div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="vurderingsdelInfo uuHiddenMobile">Del: </span><span class="vurderingsdelInfo">Skriftlig eksamen</span></td>
+<td class="col4ResultatDato">
+            <div aria-hidden="true" class="ui-column-title">Dato</div><span class="vurderingsdelInfo">21.02.2020</span></td>
+<td class="col5Kandnr textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Kand.nr</div><span class="vurderingsdelInfo">8009</span></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:40:j_idt196" name="resultatlisteForm:j_idt163:40:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:40:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:40:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for </span></button>
+        <div class="infoLinje"><span class="vurderingsdelInfo">A</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight"></td>
+</tr>
+<tr class="resultatTop">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title">Semester</div>
+        <div class="uuHidden">2020 VÅR</div>
+        <div aria-hidden="true">2020 VÅR</div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">EA-EMK2000</div>
+            <div class="infoLinje" aria-hidden="true">EA-EMK2000</div>
+            <div class="infoLinje">Elektriske maskiner og kraftelektronikk</div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="">Skriftlig eksamen</span></td>
+<td class="col4ResultatDato">
+            <div aria-hidden="true" class="ui-column-title">Dato</div><span class="">19.05.2020</span></td>
+<td class="col5Kandnr textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Kand.nr</div><span class="">8114</span></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:41:j_idt196" name="resultatlisteForm:j_idt163:41:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:41:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:41:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for EA-EMK2000</span></button>
+        <div class="infoLinje"><span class="">B</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Studiepoeng</div><span class="">10</span></td>
+</tr>
+<tr class="resultat">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title del-title">Del:</div>
+        <div class="uuHidden">2020 VÅR</div>
+        <div aria-hidden="true"></div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">EA-EMK2000</div>
+            <div class="infoLinje" aria-hidden="true"></div>
+            <div class="infoLinje"></div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="vurderingsdelInfo uuHiddenMobile">Del: </span><span class="vurderingsdelInfo">Obligatoriske krav</span></td>
+<td class="col4ResultatDato"></td>
+<td class="col5Kandnr textAlignRight"></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:42:j_idt196" name="resultatlisteForm:j_idt163:42:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:42:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:42:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for </span></button>
+        <div class="infoLinje"><span class="vurderingsdelInfo">Godkjent</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight"></td>
+</tr>
+<tr class="resultatTop">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title">Semester</div>
+        <div class="uuHidden">2020 VÅR</div>
+        <div aria-hidden="true">2020 VÅR</div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">EA-INR2001</div>
+            <div class="infoLinje" aria-hidden="true">EA-INR2001</div>
+            <div class="infoLinje">Instrumentering og reguleringsteknikk</div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="">Skriftlig eksamen</span></td>
+<td class="col4ResultatDato">
+            <div aria-hidden="true" class="ui-column-title">Dato</div><span class="">26.05.2020</span></td>
+<td class="col5Kandnr textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Kand.nr</div><span class="">8008</span></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:43:j_idt196" name="resultatlisteForm:j_idt163:43:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:43:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:43:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for EA-INR2001</span></button>
+        <div class="infoLinje"><span class="">A</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Studiepoeng</div><span class="">10</span></td>
+</tr>
+<tr class="resultat">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title del-title">Del:</div>
+        <div class="uuHidden">2020 VÅR</div>
+        <div aria-hidden="true"></div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">EA-INR2001</div>
+            <div class="infoLinje" aria-hidden="true"></div>
+            <div class="infoLinje"></div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="vurderingsdelInfo uuHiddenMobile">Del: </span><span class="vurderingsdelInfo">Obligatoriske arbeidskrav</span></td>
+<td class="col4ResultatDato"></td>
+<td class="col5Kandnr textAlignRight"></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:44:j_idt196" name="resultatlisteForm:j_idt163:44:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:44:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:44:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for </span></button>
+        <div class="infoLinje"><span class="vurderingsdelInfo">Godkjent</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight"></td>
+</tr>
+<tr class="resultatTop">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title">Semester</div>
+        <div class="uuHidden">2020 VÅR</div>
+        <div aria-hidden="true">2020 VÅR</div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">FE-EØK2000</div>
+            <div class="infoLinje" aria-hidden="true">FE-EØK2000</div>
+            <div class="infoLinje">Innovasjon og entreprenørskap med økonomi</div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="">Prosjekt med muntlig høring</span></td>
+<td class="col4ResultatDato">
+            <div aria-hidden="true" class="ui-column-title">Dato</div><span class="">08.05.2020</span></td>
+<td class="col5Kandnr textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Kand.nr</div><span class="">8517</span></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:45:j_idt196" name="resultatlisteForm:j_idt163:45:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:45:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:45:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for FE-EØK2000</span></button>
+        <div class="infoLinje"><span class="">C</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Studiepoeng</div><span class="">10</span></td>
+</tr>
+<tr class="resultat">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title del-title">Del:</div>
+        <div class="uuHidden">2020 VÅR</div>
+        <div aria-hidden="true"></div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">FE-EØK2000</div>
+            <div class="infoLinje" aria-hidden="true"></div>
+            <div class="infoLinje"></div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="vurderingsdelInfo uuHiddenMobile">Del: </span><span class="vurderingsdelInfo">Obligatoriske arbeidskrav</span></td>
+<td class="col4ResultatDato"></td>
+<td class="col5Kandnr textAlignRight"></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:46:j_idt196" name="resultatlisteForm:j_idt163:46:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:46:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:46:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for </span></button>
+        <div class="infoLinje"><span class="vurderingsdelInfo">Godkjent</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight"></td>
+</tr>
+<tr class="resultatTop">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title">Semester</div>
+        <div class="uuHidden">2019 HØST</div>
+        <div aria-hidden="true">2019 HØST</div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">FE-MAT2000</div>
+            <div class="infoLinje" aria-hidden="true">FE-MAT2000</div>
+            <div class="infoLinje">Matematikk 2 og statistikk</div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="">Skriftlig eksamen</span></td>
+<td class="col4ResultatDato">
+            <div aria-hidden="true" class="ui-column-title">Dato</div><span class="">10.12.2019</span></td>
+<td class="col5Kandnr textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Kand.nr</div><span class="">8422</span></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:47:j_idt196" name="resultatlisteForm:j_idt163:47:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:47:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:47:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for FE-MAT2000</span></button>
+        <div class="infoLinje"><span class="">A</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Studiepoeng</div><span class="">15</span></td>
+</tr>
+<tr class="resultat">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title del-title">Del:</div>
+        <div class="uuHidden">2019 HØST</div>
+        <div aria-hidden="true"></div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">FE-MAT2000</div>
+            <div class="infoLinje" aria-hidden="true"></div>
+            <div class="infoLinje"></div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="vurderingsdelInfo uuHiddenMobile">Del: </span><span class="vurderingsdelInfo">Obligatoriske krav</span></td>
+<td class="col4ResultatDato"></td>
+<td class="col5Kandnr textAlignRight"></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:48:j_idt196" name="resultatlisteForm:j_idt163:48:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:48:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:48:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for </span></button>
+        <div class="infoLinje"><span class="vurderingsdelInfo">Godkjent</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight"></td>
+</tr>
+<tr class="resultatTop">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title">Semester</div>
+        <div class="uuHidden">2019 VÅR</div>
+        <div aria-hidden="true">2019 VÅR</div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">EL-ELK1001</div>
+            <div class="infoLinje" aria-hidden="true">EL-ELK1001</div>
+            <div class="infoLinje">Elektriske kretser</div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="">Skriftlig eksamen</span></td>
+<td class="col4ResultatDato">
+            <div aria-hidden="true" class="ui-column-title">Dato</div><span class="">04.06.2019</span></td>
+<td class="col5Kandnr textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Kand.nr</div><span class="">8007</span></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:49:j_idt196" name="resultatlisteForm:j_idt163:49:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:49:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:49:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for EL-ELK1001</span></button>
+        <div class="infoLinje"><span class="">A</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Studiepoeng</div><span class="">10</span></td>
+</tr>
+<tr class="resultat">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title del-title">Del:</div>
+        <div class="uuHidden">2019 VÅR</div>
+        <div aria-hidden="true"></div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">EL-ELK1001</div>
+            <div class="infoLinje" aria-hidden="true"></div>
+            <div class="infoLinje"></div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="vurderingsdelInfo uuHiddenMobile">Del: </span><span class="vurderingsdelInfo">Obligatoriske arbeidskrav</span></td>
+<td class="col4ResultatDato"></td>
+<td class="col5Kandnr textAlignRight"></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:50:j_idt196" name="resultatlisteForm:j_idt163:50:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:50:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:50:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for </span></button>
+        <div class="infoLinje"><span class="vurderingsdelInfo">Godkjent</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight"></td>
+</tr>
+<tr class="resultatTop">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title">Semester</div>
+        <div class="uuHidden">2019 VÅR</div>
+        <div aria-hidden="true">2019 VÅR</div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">FE-FYS1000</div>
+            <div class="infoLinje" aria-hidden="true">FE-FYS1000</div>
+            <div class="infoLinje">Fysikk</div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="">Skriftlig eksamen</span></td>
+<td class="col4ResultatDato">
+            <div aria-hidden="true" class="ui-column-title">Dato</div><span class="">24.05.2019</span></td>
+<td class="col5Kandnr textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Kand.nr</div><span class="">8048</span></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:51:j_idt196" name="resultatlisteForm:j_idt163:51:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:51:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:51:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for FE-FYS1000</span></button>
+        <div class="infoLinje"><span class="">B</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Studiepoeng</div><span class="">10</span></td>
+</tr>
+<tr class="resultat">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title del-title">Del:</div>
+        <div class="uuHidden">2019 VÅR</div>
+        <div aria-hidden="true"></div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">FE-FYS1000</div>
+            <div class="infoLinje" aria-hidden="true"></div>
+            <div class="infoLinje"></div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="vurderingsdelInfo uuHiddenMobile">Del: </span><span class="vurderingsdelInfo">Obligatoriske arbeidskrav</span></td>
+<td class="col4ResultatDato"></td>
+<td class="col5Kandnr textAlignRight"></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:52:j_idt196" name="resultatlisteForm:j_idt163:52:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:52:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:52:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for </span></button>
+        <div class="infoLinje"><span class="vurderingsdelInfo">Godkjent</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight"></td>
+</tr>
+<tr class="resultatTop">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title">Semester</div>
+        <div class="uuHidden">2019 VÅR</div>
+        <div aria-hidden="true">2019 VÅR</div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">FE-MAT1001</div>
+            <div class="infoLinje" aria-hidden="true">FE-MAT1001</div>
+            <div class="infoLinje">Matematikk 1</div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="">Skriftlig eksamen</span></td>
+<td class="col4ResultatDato">
+            <div aria-hidden="true" class="ui-column-title">Dato</div><span class="">15.05.2019</span></td>
+<td class="col5Kandnr textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Kand.nr</div><span class="">8102</span></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:53:j_idt196" name="resultatlisteForm:j_idt163:53:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:53:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:53:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for FE-MAT1001</span></button>
+        <div class="infoLinje"><span class="">B</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Studiepoeng</div><span class="">10</span></td>
+</tr>
+<tr class="resultat">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title del-title">Del:</div>
+        <div class="uuHidden">2019 VÅR</div>
+        <div aria-hidden="true"></div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">FE-MAT1001</div>
+            <div class="infoLinje" aria-hidden="true"></div>
+            <div class="infoLinje"></div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="vurderingsdelInfo uuHiddenMobile">Del: </span><span class="vurderingsdelInfo">Obligatoriske arbeidskrav</span></td>
+<td class="col4ResultatDato"></td>
+<td class="col5Kandnr textAlignRight"></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:54:j_idt196" name="resultatlisteForm:j_idt163:54:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:54:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:54:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for </span></button>
+        <div class="infoLinje"><span class="vurderingsdelInfo">Godkjent</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight"></td>
+</tr>
+<tr class="none">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title">Semester</div>
+        <div class="uuHidden">2019 VÅR</div>
+        <div aria-hidden="true">2019 VÅR</div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">FE-PRO3910</div>
+            <div class="infoLinje" aria-hidden="true">FE-PRO3910</div>
+            <div class="infoLinje">Ingeniør prosjekt</div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="">Prosjekt rapport med muntlig høring</span></td>
+<td class="col4ResultatDato">
+            <div aria-hidden="true" class="ui-column-title">Dato</div><span class="">05.06.2019</span></td>
+<td class="col5Kandnr textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Kand.nr</div><span class="">8700</span></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div>
+        <div class="infoLinje"><span class="">B</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Studiepoeng</div><span class="">10</span></td>
+</tr>
+<tr class="resultatTop">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title">Semester</div>
+        <div class="uuHidden">2019 VÅR</div>
+        <div aria-hidden="true">2019 VÅR</div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">OFK1000</div>
+            <div class="infoLinje" aria-hidden="true">OFK1000</div>
+            <div class="infoLinje">Organisasjonsarbeid for klassetillitsvalgte ved USN</div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="">Hjemmeeksamen</span></td>
+<td class="col4ResultatDato">
+            <div aria-hidden="true" class="ui-column-title">Dato</div><span class="">05.04.2019</span></td>
+<td class="col5Kandnr textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Kand.nr</div><span class="">7090</span></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:56:j_idt196" name="resultatlisteForm:j_idt163:56:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:56:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:56:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for OFK1000</span></button>
+        <div class="infoLinje"><span class="">Bestått</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Studiepoeng</div><span class="">7,5</span></td>
+</tr>
+<tr class="resultat">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title del-title">Del:</div>
+        <div class="uuHidden">2019 VÅR</div>
+        <div aria-hidden="true"></div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">OFK1000</div>
+            <div class="infoLinje" aria-hidden="true"></div>
+            <div class="infoLinje"></div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="vurderingsdelInfo uuHiddenMobile">Del: </span><span class="vurderingsdelInfo">Obligatorikk - Individuell</span></td>
+<td class="col4ResultatDato"></td>
+<td class="col5Kandnr textAlignRight"></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:57:j_idt196" name="resultatlisteForm:j_idt163:57:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:57:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:57:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for </span></button>
+        <div class="infoLinje"><span class="vurderingsdelInfo">Godkjent</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight"></td>
+</tr>
+<tr class="resultat">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title del-title">Del:</div>
+        <div class="uuHidden">2019 VÅR</div>
+        <div aria-hidden="true"></div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">OFK1000</div>
+            <div class="infoLinje" aria-hidden="true"></div>
+            <div class="infoLinje"></div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="vurderingsdelInfo uuHiddenMobile">Del: </span><span class="vurderingsdelInfo">Obligatorikk 2 - Individuell</span></td>
+<td class="col4ResultatDato"></td>
+<td class="col5Kandnr textAlignRight"></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:58:j_idt196" name="resultatlisteForm:j_idt163:58:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:58:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:58:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for </span></button>
+        <div class="infoLinje"><span class="vurderingsdelInfo">Godkjent</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight"></td>
+</tr>
+<tr class="resultat">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title del-title">Del:</div>
+        <div class="uuHidden">2019 VÅR</div>
+        <div aria-hidden="true"></div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">OFK1000</div>
+            <div class="infoLinje" aria-hidden="true"></div>
+            <div class="infoLinje"></div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="vurderingsdelInfo uuHiddenMobile">Del: </span><span class="vurderingsdelInfo">Obligatorikk 3 - individuell</span></td>
+<td class="col4ResultatDato"></td>
+<td class="col5Kandnr textAlignRight"></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:59:j_idt196" name="resultatlisteForm:j_idt163:59:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:59:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:59:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for </span></button>
+        <div class="infoLinje"><span class="vurderingsdelInfo">Godkjent</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight"></td>
+</tr>
+<tr class="resultat">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title del-title">Del:</div>
+        <div class="uuHidden">2019 VÅR</div>
+        <div aria-hidden="true"></div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">OFK1000</div>
+            <div class="infoLinje" aria-hidden="true"></div>
+            <div class="infoLinje"></div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="vurderingsdelInfo uuHiddenMobile">Del: </span><span class="vurderingsdelInfo">Obligatorikk 4 - individuell</span></td>
+<td class="col4ResultatDato"></td>
+<td class="col5Kandnr textAlignRight"></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:60:j_idt196" name="resultatlisteForm:j_idt163:60:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:60:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:60:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for </span></button>
+        <div class="infoLinje"><span class="vurderingsdelInfo">Godkjent</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight"></td>
+</tr>
+<tr class="resultatTop">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title">Semester</div>
+        <div class="uuHidden">2018 HØST</div>
+        <div aria-hidden="true">2018 HØST</div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">EL-DIS1000</div>
+            <div class="infoLinje" aria-hidden="true">EL-DIS1000</div>
+            <div class="infoLinje">Digitalteknikk</div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="">Skriftlig eksamen</span></td>
+<td class="col4ResultatDato">
+            <div aria-hidden="true" class="ui-column-title">Dato</div><span class="">17.12.2018</span></td>
+<td class="col5Kandnr textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Kand.nr</div><span class="">8045</span></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:61:j_idt196" name="resultatlisteForm:j_idt163:61:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:61:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:61:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for EL-DIS1000</span></button>
+        <div class="infoLinje"><span class="">B</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Studiepoeng</div><span class="">10</span></td>
+</tr>
+<tr class="resultat">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title del-title">Del:</div>
+        <div class="uuHidden">2018 HØST</div>
+        <div aria-hidden="true"></div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">EL-DIS1000</div>
+            <div class="infoLinje" aria-hidden="true"></div>
+            <div class="infoLinje"></div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="vurderingsdelInfo uuHiddenMobile">Del: </span><span class="vurderingsdelInfo">Obligatoriske arbeidskrav</span></td>
+<td class="col4ResultatDato"></td>
+<td class="col5Kandnr textAlignRight"></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:62:j_idt196" name="resultatlisteForm:j_idt163:62:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:62:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:62:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for </span></button>
+        <div class="infoLinje"><span class="vurderingsdelInfo">Godkjent</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight"></td>
+</tr>
+<tr class="resultatTop">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title">Semester</div>
+        <div class="uuHidden">2018 HØST</div>
+        <div aria-hidden="true">2018 HØST</div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">EL-POM1001</div>
+            <div class="infoLinje" aria-hidden="true">EL-POM1001</div>
+            <div class="infoLinje">Programmering og mikrokontrollere</div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="">Skriftlig eksamen</span></td>
+<td class="col4ResultatDato">
+            <div aria-hidden="true" class="ui-column-title">Dato</div><span class="">12.12.2018</span></td>
+<td class="col5Kandnr textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Kand.nr</div><span class="">8348</span></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:63:j_idt196" name="resultatlisteForm:j_idt163:63:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:63:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:63:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for EL-POM1001</span></button>
+        <div class="infoLinje"><span class="">B</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Studiepoeng</div><span class="">10</span></td>
+</tr>
+<tr class="resultat">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title del-title">Del:</div>
+        <div class="uuHidden">2018 HØST</div>
+        <div aria-hidden="true"></div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">EL-POM1001</div>
+            <div class="infoLinje" aria-hidden="true"></div>
+            <div class="infoLinje"></div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="vurderingsdelInfo uuHiddenMobile">Del: </span><span class="vurderingsdelInfo">Obligatoriske arbeidskrav</span></td>
+<td class="col4ResultatDato"></td>
+<td class="col5Kandnr textAlignRight"></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:64:j_idt196" name="resultatlisteForm:j_idt163:64:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:64:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:64:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for </span></button>
+        <div class="infoLinje"><span class="vurderingsdelInfo">Godkjent</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight"></td>
+</tr>
+<tr class="resultatTop">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title">Semester</div>
+        <div class="uuHidden">2018 HØST</div>
+        <div aria-hidden="true">2018 HØST</div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">FE-IFI1000</div>
+            <div class="infoLinje" aria-hidden="true">FE-IFI1000</div>
+            <div class="infoLinje">Ingeniørfaglig innføringsemne</div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="">Samlet vurdering, skriftlig rapport og muntlig fremføring</span></td>
+<td class="col4ResultatDato">
+            <div aria-hidden="true" class="ui-column-title">Dato</div><span class="">04.12.2018</span></td>
+<td class="col5Kandnr textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Kand.nr</div><span class="">8604</span></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:65:j_idt196" name="resultatlisteForm:j_idt163:65:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:65:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:65:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for FE-IFI1000</span></button>
+        <div class="infoLinje"><span class="">B</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Studiepoeng</div><span class="">10</span></td>
+</tr>
+<tr class="resultat">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title del-title">Del:</div>
+        <div class="uuHidden">2018 HØST</div>
+        <div aria-hidden="true"></div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">FE-IFI1000</div>
+            <div class="infoLinje" aria-hidden="true"></div>
+            <div class="infoLinje"></div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="vurderingsdelInfo uuHiddenMobile">Del: </span><span class="vurderingsdelInfo">Obligatoriske arbeidskrav</span></td>
+<td class="col4ResultatDato"></td>
+<td class="col5Kandnr textAlignRight"></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:66:j_idt196" name="resultatlisteForm:j_idt163:66:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:66:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:66:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for </span></button>
+        <div class="infoLinje"><span class="vurderingsdelInfo">Godkjent</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight"></td>
+</tr>
+<tr class="resultatTop">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title">Semester</div>
+        <div class="uuHidden">2016 VÅR</div>
+        <div aria-hidden="true">2016 VÅR</div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">FK-FYS0001</div>
+            <div class="infoLinje" aria-hidden="true">FK-FYS0001</div>
+            <div class="infoLinje">Fysikk, forkurs</div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="">Skriftlig eksamen</span></td>
+<td class="col4ResultatDato">
+            <div aria-hidden="true" class="ui-column-title">Dato</div><span class="">01.06.2016</span></td>
+<td class="col5Kandnr textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Kand.nr</div><span class="">321</span></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:67:j_idt196" name="resultatlisteForm:j_idt163:67:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:67:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:67:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for FK-FYS0001</span></button>
+        <div class="infoLinje"><span class="">C</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Studiepoeng</div><span class="">0</span></td>
+</tr>
+<tr class="resultat">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title del-title">Del:</div>
+        <div class="uuHidden">2016 VÅR</div>
+        <div aria-hidden="true"></div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">FK-FYS0001</div>
+            <div class="infoLinje" aria-hidden="true"></div>
+            <div class="infoLinje"></div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="vurderingsdelInfo uuHiddenMobile">Del: </span><span class="vurderingsdelInfo">Obligatoriske arbeidskrav</span></td>
+<td class="col4ResultatDato"></td>
+<td class="col5Kandnr textAlignRight"></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:68:j_idt196" name="resultatlisteForm:j_idt163:68:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:68:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:68:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for </span></button>
+        <div class="infoLinje"><span class="vurderingsdelInfo">Godkjent</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight"></td>
+</tr>
+<tr class="resultatTop">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title">Semester</div>
+        <div class="uuHidden">2016 VÅR</div>
+        <div aria-hidden="true">2016 VÅR</div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">FK-MAT0001</div>
+            <div class="infoLinje" aria-hidden="true">FK-MAT0001</div>
+            <div class="infoLinje">Matematikk, forkurs</div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="">Skriftlig eksamen</span></td>
+<td class="col4ResultatDato">
+            <div aria-hidden="true" class="ui-column-title">Dato</div><span class="">26.05.2016</span></td>
+<td class="col5Kandnr textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Kand.nr</div><span class="">306</span></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:69:j_idt196" name="resultatlisteForm:j_idt163:69:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:69:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:69:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for FK-MAT0001</span></button>
+        <div class="infoLinje"><span class="">B</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Studiepoeng</div><span class="">0</span></td>
+</tr>
+<tr class="resultat">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title del-title">Del:</div>
+        <div class="uuHidden">2016 VÅR</div>
+        <div aria-hidden="true"></div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">FK-MAT0001</div>
+            <div class="infoLinje" aria-hidden="true"></div>
+            <div class="infoLinje"></div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="vurderingsdelInfo uuHiddenMobile">Del: </span><span class="vurderingsdelInfo">Obligatoriske arbeidskrav</span></td>
+<td class="col4ResultatDato"></td>
+<td class="col5Kandnr textAlignRight"></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:70:j_idt196" name="resultatlisteForm:j_idt163:70:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:70:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:70:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for </span></button>
+        <div class="infoLinje"><span class="vurderingsdelInfo">Godkjent</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight"></td>
+</tr>
+<tr class="resultatTop">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title">Semester</div>
+        <div class="uuHidden">2016 VÅR</div>
+        <div aria-hidden="true">2016 VÅR</div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">FK-NOR0001</div>
+            <div class="infoLinje" aria-hidden="true">FK-NOR0001</div>
+            <div class="infoLinje">Kommunikasjon og norsk, forkurs</div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="">Skriftlig eksamen</span></td>
+<td class="col4ResultatDato">
+            <div aria-hidden="true" class="ui-column-title">Dato</div><span class="">30.05.2016</span></td>
+<td class="col5Kandnr textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Kand.nr</div><span class="">123</span></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:71:j_idt196" name="resultatlisteForm:j_idt163:71:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:71:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:71:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for FK-NOR0001</span></button>
+        <div class="infoLinje"><span class="">C</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Studiepoeng</div><span class="">0</span></td>
+</tr>
+<tr class="resultat">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title del-title">Del:</div>
+        <div class="uuHidden">2016 VÅR</div>
+        <div aria-hidden="true"></div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">FK-NOR0001</div>
+            <div class="infoLinje" aria-hidden="true"></div>
+            <div class="infoLinje"></div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="vurderingsdelInfo uuHiddenMobile">Del: </span><span class="vurderingsdelInfo">Obligatoriske arbeidskrav</span></td>
+<td class="col4ResultatDato"></td>
+<td class="col5Kandnr textAlignRight"></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:72:j_idt196" name="resultatlisteForm:j_idt163:72:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:72:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:72:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for </span></button>
+        <div class="infoLinje"><span class="vurderingsdelInfo">Godkjent</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight"></td>
+</tr>
+<tr class="none">
+<td class="col1Semester firstColumn">
+            <div aria-hidden="true" class="ui-column-title">Semester</div>
+        <div class="uuHidden">2016 VÅR</div>
+        <div aria-hidden="true">2016 VÅR</div></td>
+<td class="col2Emne">
+        <div aria-hidden="true" class="ui-column-title">Emne</div>
+
+        <div class="column-info">
+            <div class="uuHidden">FK-TEK0001</div>
+            <div class="infoLinje" aria-hidden="true">FK-TEK0001</div>
+            <div class="infoLinje">Teknologi og samfunn, forkurs</div>
+        </div></td>
+<td class="col3Vurdering">
+        <div aria-hidden="true" class="ui-column-title">Vurderingsgrunnlag</div><span class="">Mappevurdering</span></td>
+<td class="col4ResultatDato"></td>
+<td class="col5Kandnr textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Kand.nr</div><span class="">35</span></td>
+<td class="col6Resultat textAlignRight">
+        <div aria-hidden="true" class="ui-column-title" style="margin-bottom: 8px;">Resultat</div><button id="resultatlisteForm:j_idt163:73:j_idt196" name="resultatlisteForm:j_idt163:73:j_idt196" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only icon iconAction statistikkButton statistikkButton-icon" onclick="PrimeFaces.bcn(this,event,[function(event){setElementAsFocusWhenCallingHidePopup(this.id);},function(event){PrimeFaces.ab({s:&quot;resultatlisteForm:j_idt163:73:j_idt196&quot;,f:&quot;resultatlisteForm&quot;,p:&quot;resultatlisteForm:j_idt163:73:j_idt196&quot;,u:&quot;histogramPopup:popup&quot;,onco:function(xhr,status,args,data){saveFocusElement(); showPopup('histogramPopup');return false;;}});return false;}]);" style="margin-top: -6px;" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Statistikk for FK-TEK0001</span></button>
+        <div class="infoLinje"><span class="">B</span>
+        </div></td>
+<td class="col7Studiepoeng textAlignRight">
+            <div aria-hidden="true" class="ui-column-title">Studiepoeng</div><span class="">0</span></td>
+</tr>
+</tbody>
+</table>
+
+    <p class="table-footer">Totalt: 320 studiepoeng</p></div></div><input type="hidden" name="javax.faces.ViewState" id="j_id1:javax.faces.ViewState:2" value="5983889490698968133:-7636670621407700783" autocomplete="off">
+</form>
+
+<div class="left-side link-wrapper"><a href="/studentweb/bestillinger.jsf" class="link">Bestilling av karakterutskrift med mer</a>
+</div>
+<div class="left-side link-wrapper"><a href="/studentweb/rapportertLanekassen.jsf" class="link">Opplysninger til Lånekassen</a>
+</div><div id="popups"><div id="histogramPopup:popup" class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-shadow ui-hidden-container  lightbox" style="max-width: 800px; height: auto;" role="dialog" aria-describedby="histogramPopup:popup_content" aria-hidden="true" aria-modal="true" aria-labelledby="histogramPopup:popup_title"><div class="ui-dialog-titlebar ui-widget-header ui-helper-clearfix ui-corner-top"><div id="histogramPopup:popup_title" class="ui-dialog-title">
+        <h1><span id="histogramPopup:title" class="title">
+                Statistikk for , 
+            </span>
+        </h1></div><a href="#" class="ui-dialog-titlebar-icon ui-dialog-titlebar-close ui-corner-all" aria-label="Lukk" role="button"><span class="ui-icon ui-icon-closethick"></span></a></div><div class="ui-dialog-content ui-widget-content" id="histogramPopup:popup_content">
+    <a href="#" id="focus_link_histogramPopup" style="display: block;">&amp;nbsp;</a>
+    
+    <div class="content">
+<figure class="barchart" id="diagram"></figure>
+<script type="text/javascript">
+var jsonString =''
+var fordelingArr = !!jsonString ? JSON.parse('') : null;
+if (fordelingArr) BAR_FUN(jQuery).drawChart(fordelingArr, jQuery(".barchart#diagram"),
+                    "Diagram av karakterfordelingen i ", 5, 10);
+</script>
+<div style="margin: auto; max-width: 420px; text-align: center;">Din karakter:  
+</div>
+    </div>
+        <div class="actions">
+<a href="#" onclick="hidePopupAndGiveFocusToSavedFocusElement('histogramPopup'); return false;" class="link cancel">
+    Lukk
+</a>
+        </div></div></div>
+<form id="leggTilEmneForm" name="leggTilEmneForm" method="post" action="/studentweb/resultater.jsf" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="leggTilEmneForm" value="leggTilEmneForm">
+<input type="hidden" name="javax.faces.ViewState" id="j_id1:javax.faces.ViewState:3" value="5983889490698968133:-7636670621407700783" autocomplete="off">
+</form></div><script>
+var idleCheck;
+var finalTimeout;
+var interval;
+var counter;
+var idle;
+var forsteAdvarsel = 300;
+var sisteAdvarsel = 61;
+var idleTimeoutVerdier = [1800,3600,7200];
+var idleTimeoutValgtIdx = '0';
+var idleTimeout = 0;
+var sisteGang = 0;
+var popupId = "sessionTimeoutPopup";
+
+function setCounter(s) {
+counter = s;	
+}
+
+function updateCountdownCounter(){
+$("#countDown").text(secondsToHMS(counter));
+}
+
+function secondsToHMS(seconds){
+return new Date(seconds * 1000).toISOString().substr(11, 8); 
+}
+
+function sessionTimeoutReset() {
+idle = true;
+clearTimeout(finalTimeout);
+idleCheck=setTimeout(checkIdle, 60*1000);
+setIdleTimeout();
+}
+
+function huskIdleTimeoutValgtIdx() {
+idleTimeoutValgtIdx = jQuery('input[name="SessionTimeoutForm:sessionTimeoutPopup:velg_tidsavbrudd"]:checked').val();
+}
+
+function setIdleTimeout() {
+idleTimeout = idleTimeoutVerdier[idleTimeoutValgtIdx]-forsteAdvarsel-sisteAdvarsel;
+}
+
+function startCountdown() {
+clearInterval(interval);                           
+interval=setInterval(function() {
+    counter--;
+    if (!idle) {
+        clearInterval(interval);
+    }
+    if(counter < 0) {          
+        hidePopup(popupId);
+        window.location.href = "/studentweb/velgInstitusjon.jsf";
+        clearInterval(interval);
+        clearTimeout(idleCheck);
+        sisteGang = 0;
+    } else {
+        updateCountdownCounter();
+    }
+}, 1000);            
+}       
+
+function finalIdleCheck(prompt){
+if(idle){
+    if(prompt){
+        $("#advarsel").text("Siste advarsel");
+        addTextToCountMinutes();
+    }
+} else {
+    sessionTimeoutReset();
+}
+}
+
+function checkIdle(){
+if(idle){
+    if(Math.floor((new Date() - sisteGang)/1000) >= idleTimeout){
+        showPopup(popupId);
+        finalTimeout = setTimeout(finalIdleCheck, forsteAdvarsel*1000, true);
+        setCounter(forsteAdvarsel+sisteAdvarsel);
+        addTextToCountMinutes();
+        startCountdown();
+    } else {
+        idleCheck=setTimeout(checkIdle, 60*1000);
+    }
+
+} else {
+    sisteGang =  new Date();
+    sessionTimeoutReset();
+}
+}
+
+function addTextToCountMinutes() {
+var minutes = new Date(counter * 1000).getMinutes();
+var minutesText = minutes + ' ' + (minutes > 1 ? msgMinutter : msgMinutt);
+$("#countMinutes").text(minutesText);
+}
+
+$(document).ready(function(){
+if(true){
+
+    const originalOpen = XMLHttpRequest.prototype.open;
+    XMLHttpRequest.prototype.open = function() {
+        this.addEventListener('loadend', function () {
+            idle = false;
+        });
+        originalOpen.apply(this, arguments);
+    };
+
+    idle=true;
+    setIdleTimeout();
+    idleCheck=setTimeout(checkIdle, 60*1000);
+    sisteGang =  new Date();
+};
+});
+</script>
+<form id="SessionTimeoutForm" name="SessionTimeoutForm" method="post" action="/studentweb/resultater.jsf" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="SessionTimeoutForm" value="SessionTimeoutForm">
+<div id="SessionTimeoutForm:sessionTimeoutPopup:popup" class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-shadow ui-hidden-container  lightbox" style="max-width: 800px; height: auto;" role="dialog" aria-describedby="SessionTimeoutForm:sessionTimeoutPopup:popup_content" aria-hidden="true" aria-modal="true" aria-labelledby="SessionTimeoutForm:sessionTimeoutPopup:popup_title"><div class="ui-dialog-titlebar ui-widget-header ui-helper-clearfix ui-corner-top"><div id="SessionTimeoutForm:sessionTimeoutPopup:popup_title" class="ui-dialog-title">
+        <h1><span id="SessionTimeoutForm:sessionTimeoutPopup:title" class="title">
+                Du har vært inaktiv for lenge.
+            </span>
+        </h1></div></div><div class="ui-dialog-content ui-widget-content" id="SessionTimeoutForm:sessionTimeoutPopup:popup_content">
+    <a href="#" id="focus_link_sessionTimeoutPopup" style="display: block;">&amp;nbsp;</a>
+    
+    <div class="content">
+    <div role="alert"><div id="SessionTimeoutForm:sessionTimeoutPopup:countdownContainer" class="meldingPopupInnhold">
+            <p id="advarsel"></p>
+            <p>
+                Du vil bli logget ut om:
+                <span id="countDown" role="timer"></span>
+                <span id="countMinutes" class="uuHidden"></span>
+            </p></div>
+        <fieldset>
+            <legend>Velg nytt tidsavbrudd</legend><table id="SessionTimeoutForm:sessionTimeoutPopup:velg_tidsavbrudd" class="radioknapper excludeNavigationCheck" role="presentation">
+<tbody><tr style="border: none;">
+<td style="border: none;">
+<input type="radio" checked="checked" name="SessionTimeoutForm:sessionTimeoutPopup:velg_tidsavbrudd" id="SessionTimeoutForm:sessionTimeoutPopup:velg_tidsavbrudd:0" value="0"><label for="SessionTimeoutForm:sessionTimeoutPopup:velg_tidsavbrudd:0">  30 minutter</label></td>
+</tr>
+<tr style="border: none;">
+<td style="border: none;">
+<input type="radio" name="SessionTimeoutForm:sessionTimeoutPopup:velg_tidsavbrudd" id="SessionTimeoutForm:sessionTimeoutPopup:velg_tidsavbrudd:1" value="1"><label for="SessionTimeoutForm:sessionTimeoutPopup:velg_tidsavbrudd:1"> 1 time </label></td>
+</tr>
+<tr style="border: none;">
+<td style="border: none;">
+<input type="radio" name="SessionTimeoutForm:sessionTimeoutPopup:velg_tidsavbrudd" id="SessionTimeoutForm:sessionTimeoutPopup:velg_tidsavbrudd:2" value="2"><label for="SessionTimeoutForm:sessionTimeoutPopup:velg_tidsavbrudd:2"> 2 timer </label></td>
+</tr>
+</tbody></table>
+        </fieldset>
+    </div>
+    <script>
+        var msgMinutt = 'minutt';
+        var msgMinutter = 'minutter';
+    </script>
+    </div>
+        <div class="actions"><button id="SessionTimeoutForm:sessionTimeoutPopup:j_idt531" name="SessionTimeoutForm:sessionTimeoutPopup:j_idt531" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only medium green lagreOgLukk" onclick="PrimeFaces.bcn(this,event,[function(event){sessionTimeoutReset()},function(event){PrimeFaces.ab({s:&quot;SessionTimeoutForm:sessionTimeoutPopup:j_idt531&quot;,f:&quot;SessionTimeoutForm&quot;,onco:function(xhr,status,args,data){huskIdleTimeoutValgtIdx(); hideInfoPanel(); hidePopup('sessionTimeoutPopup'); ;}});return false;}]);" type="submit" role="button" aria-disabled="false"><span class="ui-button-text ui-c">Velg </span></button>
+        </div></div></div><input type="hidden" name="javax.faces.ViewState" id="j_id1:javax.faces.ViewState:4" value="5983889490698968133:-7636670621407700783" autocomplete="off">
+</form><div class="til-toppen clearfix">
+    <a class="link" href="#top">Til toppen</a></div>
+     </div>
+  </main>
+</div>
+<footer><div id="j_idt545:footerContainer" class="container">
+    <div id="footerNavContainer">
+            <nav>
+<form id="j_idt545:j_idt549" name="j_idt545:j_idt549" method="post" action="/studentweb/resultater.jsf" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="j_idt545:j_idt549" value="j_idt545:j_idt549">
+
+                    <ul><li><a href="/studentweb/studier.jsf">Studier</a></li><li><a href="/studentweb/aktiveemner.jsf">Aktive emner</a></li><li><a href="/studentweb/resultater.jsf">Resultater</a></li><li><a href="/studentweb/klageoversikt.jsf">Begrunnelse og klager</a></li><li><a href="/studentweb/bestillinger.jsf">Bestillinger</a></li><li><a href="/studentweb/betaling.jsf">Betaling</a></li><li><a href="/studentweb/dokumentarkiv.jsf">Dokumenter</a></li><li><a href="/studentweb/sporreundersokelse.jsf">Spørreundersøkelse</a></li>
+                            <li><a href="/studentweb/rapportertLanekassen.jsf">Opplysninger til Lånekassen</a>
+                            </li>
+                        <li><a href="/studentweb/minprofil.jsf">Min profil</a>
+                        </li>
+                        <li><a href="#" onclick="jsf.util.chain(this,event,'clearSessionStorage();','mojarra.jsfcljs(document.getElementById(\'j_idt545:j_idt549\'),{\'j_idt545:j_idt549:j_idt562\':\'j_idt545:j_idt549:j_idt562\'},\'\')');return false">Logg ut</a>
+                        </li>
+                    </ul><input type="hidden" name="javax.faces.ViewState" id="j_id1:javax.faces.ViewState:5" value="5983889490698968133:-7636670621407700783" autocomplete="off">
+</form>
+            </nav>
+    </div>
+    <ul>
+        <li>Studentweb 3.3.47-30.04.2024-06:22</li>
+            <li style="display:none">
+            </li>
+            <li style="display:none"></li>
+            <li style="display:none">Telefon: </li>
+            <li style="display:none">E-post:
+                <a class="link" href="mailto:"></a>
+            </li>
+            <li>
+
+<a class="link personvernlink externalLink" href="https://www.usn.no/usn/no/bunntekst/personvernerklaring-for-studentweb" target="_blank">Personvernerklæring</a>
+            </li>
+            <li>
+
+<a class="link tilgjengelighetserklaeringlink externalLink" href="https://uustatus.no/nb/erklaringer/publisert/aad707b0-391b-4b8b-8c07-328ab801050e" target="_blank">Tilgjengelighetserklæring</a>
+            </li>
+    </ul>
+    <div style="margin: auto; text-align: center;">
+    </div>
+        <div id="cookie_sticky" style="display: block;">
+            <span id="cookie_sticky_text"></span>
+            <a id="cookie_sticky_read" class="link" href="/studentweb/cookies.jsf">Les om vår bruk av cookies.</a>
+            <a id="cookie_sticky_hide" class="link icon iconAction linkAsButtonFlag" href="#" onclick="disableCookieSticky(); return false;" role="button">
+                <img src="/studentweb/resources/img/icons_b/16x16/Delete-16x16.png" alt="Ikke vis melding om cookies." title="Ikke vis melding om cookies.">
+            </a>
+        </div></div>
+</footer>
+<script>
+    var skipLinkText = {
+        'no': 'Gå til innhold',
+        'nn': 'Gå til innhald',
+        'en': 'Go to content'
+    };
+
+    jQuery(window).on("load", function() {
+        jQuery("#uuShortcut").text(skipLinkText[window.funSetup.language]);
+    });
+</script>
+
+<div id="textarea_simulator" style="position: absolute; top: 0px; left: 0px; visibility: hidden;"></div><div class="ui-dialog-docking-zone"></div></body></html>
